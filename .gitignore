@@ -3,7 +3,8 @@
 
 *IDE
 *\.idea\*
-
+model1
+model2
 venv\
 
 Resources\
@@ -11,3 +12,4 @@ test_data/*
 
 *.log
 *.out
+
