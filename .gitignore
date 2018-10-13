@@ -4,7 +4,10 @@
 *IDE
 *\.idea\*
 
-Resources\
 venv\
 
+Resources\
+test_data/*
+
+*.log
 *.out
