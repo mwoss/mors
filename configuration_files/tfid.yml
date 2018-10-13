@@ -1,0 +1,15 @@
+local:
+  data_path: data/
+  model_path: model/tfidf/persistence/tfidf_model
+  dict_path: model/tfidf/persistence/dict
+  index_path: search_engine/tfidf/persistence/index
+  url_path: search_engine/tfidf/persistence/url
+  max_workers: 4
+
+zeus_dag:
+  data_path: /mnt/auto/people/plgdagmara/mors/data/
+  model_path: /mnt/auto/people/plgdagmara/mors/model/tfidf/persistence/tfidf_model
+  dict_path: /mnt/auto/people/plgdagmara/mors/model/tfidf/persistence/dict
+  index_path: /mnt/auto/people/plgdagmara/mors/search_engine/tfidf/persistence/index
+  url_path: /mnt/auto/people/plgdagmara/mors/search_engine/tfidf/persistence/url
+  max_workers: 4
