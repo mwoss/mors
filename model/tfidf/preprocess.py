@@ -4,7 +4,6 @@ from nltk import PorterStemmer, RegexpTokenizer
 from stop_words import get_stop_words
 
 
-
 class Preprocessor(object):
     def __init__(self, max_workers=4):
         self.max_workers = max_workers

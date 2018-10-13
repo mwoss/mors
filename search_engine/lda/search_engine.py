@@ -1,11 +1,14 @@
 import logging
 import pickle
 
+import sys
 from gensim import similarities
 from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 
+from configuration.lda.config import LdaConfig
 from model.lda.preprocess import Preprocessor
+from search_engine.lda.logger.logger_config import init_logger
 
 
 def save(filename, what):
@@ -63,25 +66,38 @@ class SearchEngine(object):
         bags_of_words = [(url, self.dictionary.doc2bow(doc)) for url, doc in preproc_docs_with_urls]
         return [(url, self.lda_model[bow]) for url, bow in bags_of_words]
 
-    def dummy_index(self, docs_with_urls):
+    def create_index(self, docs_with_urls):
         self.log.info("Creating index out of %d documents", len(docs_with_urls))
         urls, doc_bows = zip(*self.infer_all(docs_with_urls))
         self.urls = urls
         self.index = similarities.SparseMatrixSimilarity(doc_bows, num_features=self.topics)
 
-    def dummy_search(self, query):
+    def search(self, query):
         self.log.info("Searching for documents similar to %s", query)
         inferred = self.index[self.infer(query)]
         ss = sorted(enumerate(inferred), key=lambda item: -item[1])
         return [(self.urls[i], sim) for i, sim in ss]
 
-    def partial_search(self, query):
+    def dict_search(self, query, results=100):
         infer_query = self.infer(query)
         inferred = self.index[infer_query]
-        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:500]
+        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:results]
 
         query_len = len(query.split(" "))
         return {self.urls[i]: self.adjust(query_len, sim) for i, sim in inferred}
 
     def adjust(self, query_length, similarity):
         return similarity / ((5 - query_length) ** 2) if query_length < 4 else similarity
+
+    @staticmethod
+    def with_loaded_model():
+        init_logger()
+
+        config = LdaConfig(sys.argv[1], 'lda_search_engine').get_current_config()
+
+        searchEngine = SearchEngine(config['topics'])
+
+        searchEngine.load_model(config['model_path'], config['dict_path'])
+
+        searchEngine.load_index(config['index_path'], config['url_path'])
+        return searchEngine

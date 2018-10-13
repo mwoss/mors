@@ -1,15 +1,15 @@
 import logging
 import pickle
 
-
+import sys
 from gensim import similarities
 from gensim.corpora import Dictionary
 from gensim.models import TfidfModel
 
-# from myparser import timed
+from configuration.tfidf.config import TfidfConfig
 from model.tfidf.preprocess import Preprocessor
+from search_engine.tfidf.logger.logger_config import init_logger
 
-# config file here?
 
 def save(filename, what):
     with open(filename, 'wb') as f:
@@ -23,7 +23,7 @@ def load(filename):
 
 class SearchEngine(object):
     def __init__(self,
-                 max_workers =4,
+                 max_workers=4,
                  tfidf_model=None,
                  dictionary=None):
         self.log = logging.getLogger('tfidf_search_engine')
@@ -69,10 +69,32 @@ class SearchEngine(object):
         self.log.info("Loading urls from %s", url_path)
         self.urls = load(url_path)
 
-    # @timed
-    def dummy_search(self, query):
+    def search(self, query):
         self.log.info("Searching for documents similar to %s", query)
-        infer_query=self.infer(query)
+        infer_query = self.infer(query)
         inferred = self.index[infer_query]
         ss = sorted(enumerate(inferred), key=lambda item: -item[1])
         return [(self.urls[i], sim) for i, sim in ss]
+
+    def dict_search(self, query, results=100):
+        infer_query = self.infer(query)
+        inferred = self.index[infer_query]
+        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:results]
+
+        query_len = len(query.split(" "))
+        return {self.urls[i]: self.adjust(query_len, sim) for i, sim in inferred}
+
+    def adjust(self, query_length, similarity):
+        return similarity * ((4 / query_length) ** 2) if query_length > 4 else similarity
+
+    @staticmethod
+    def with_loaded_model():
+        init_logger()
+
+        config = TfidfConfig(sys.argv[1], 'tfidf_search_engine').get_current_config()
+
+        searchEngine = SearchEngine()
+        searchEngine.load_model(config['model_path'], config['dict_path'])
+
+        searchEngine.load_index(config['index_path'], config['url_path'])
+        return searchEngine

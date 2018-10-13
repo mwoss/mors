@@ -24,7 +24,6 @@ class Preprocessor(object):
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
             return list(executor.map(self.preprocess_doc, doc_list))
 
-
     def preprocess_doc_with_url(self, doc_with_url):
         url, content = doc_with_url
 

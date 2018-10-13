@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     searchEngine = SearchEngine(config['topics'])
     searchEngine.load_model(config['model_path'], config['dict_path'])
-    searchEngine.dummy_index(docs)
+    searchEngine.create_index(docs)
 
     searchEngine.save_index(config['index_path'], config['url_path'])
     searchEngine.load_index(config['index_path'], config['url_path'])
@@ -23,4 +23,4 @@ if __name__ == '__main__':
 
     while inp != 'q':
         inp = input("Enter query: ")
-        print(searchEngine.dummy_search(inp)[:3])
+        print(searchEngine.search(inp)[:3])
