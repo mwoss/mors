@@ -1,5 +1,6 @@
-from search_engine.lda.search_engine import SearchEngine as ldaEngine
-from search_engine.tfidf.search_engine import SearchEngine as tfidfEngine
+from search_engine.lda.search_engine import LdaEngine
+from search_engine.tfidf.search_engine import TfidfEngine
+from search_engine.doc2vec.SearchEngine import D2VEngine
 
 
 class AggregateSearch(object):
@@ -20,7 +21,8 @@ class AggregateSearch(object):
 
 if __name__ == '__main__':
 
-    search = AggregateSearch(ldaEngine.with_loaded_model(), tfidfEngine.with_loaded_model())
+    search = AggregateSearch(LdaEngine.with_loaded_model(), TfidfEngine.with_loaded_model(),
+                             D2VEngine.with_loaded_model())
 
     inp = ""
 

@@ -1,8 +1,8 @@
 local:
   data_path: Resources/
   encoding: iso-8859-1
-  dbow_model_path: model/doc2vec/persistance/dbow/
-  dm_model_path: model/doc2vec/persistance/dm/
+  dbow_model_path: model/doc2vec/persistence/model
+  dm_model_path: model/doc2vec/persistence/dm/
   max_workers: 4
   vector_size: 100
   window: 5

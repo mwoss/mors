@@ -22,9 +22,10 @@ d = config['data_path']
 data_directories = [os.path.join(d, o) for o in os.listdir(d) if os.path.isdir(os.path.join(d, o))]
 article_parser = Parser(data_directories, config['encoding'])
 articles = article_parser.parse_articles_from_directories()
-print(articles[0])
 preprocessor = Preprocessor(config['max_workers'])
 docs = preprocessor.process_docs_with_urls(articles)
 trainer = Trainer(config['max_workers'], config['vector_size'], config['window'], config['min_count'], config['epochs'],
                   config['dbow_model_path'] + 'model', config['dm_model_path'] + "model")
 trainer.train(docs)
+
+

@@ -21,7 +21,7 @@ def load(filename):
         return pickle.load(f)
 
 
-class SearchEngine(object):
+class TfidfEngine(object):
     def __init__(self,
                  max_workers=4,
                  tfidf_model=None,
@@ -93,7 +93,7 @@ class SearchEngine(object):
 
         config = TfidfConfig(sys.argv[1], 'tfidf_search_engine').get_current_config()
 
-        searchEngine = SearchEngine()
+        searchEngine = TfidfEngine()
         searchEngine.load_model(config['model_path'], config['dict_path'])
 
         searchEngine.load_index(config['index_path'], config['url_path'])

@@ -21,7 +21,7 @@ def load(filename):
         return pickle.load(f)
 
 
-class SearchEngine(object):
+class LdaEngine(object):
     def __init__(self,
                  topics,
                  max_workers=4,
@@ -95,7 +95,7 @@ class SearchEngine(object):
 
         config = LdaConfig(sys.argv[1], 'lda_search_engine').get_current_config()
 
-        searchEngine = SearchEngine(config['topics'])
+        searchEngine = LdaEngine(config['topics'])
 
         searchEngine.load_model(config['model_path'], config['dict_path'])
 
