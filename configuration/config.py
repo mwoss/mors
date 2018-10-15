@@ -5,16 +5,15 @@ from yaml import load
 
 
 class ConfigNotFoundException(Exception):
-    def __init__(self, path, config):
-        self.config = config
-        self.path = path
-        super().__init__(f"Config {config} was not found in conf/ directory")
+    def __init__(self, config_name):
+        self.config_name = config_name
+        super().__init__(f"Config {config_name} was not found in conf/ directory")
 
 
-class Prefix(Enum):
-    NO_PREFIX = ''
-    LOCAL = 'local_'
-    PRODUCTION = 'prod_'
+class ConfigProfileNotFoundException(Exception):
+    def __init__(self, profile):
+        self.profile = profile
+        super().__init__(f"Config file didn't include profile: {profile}")
 
 
 class ConfigLoader:
@@ -25,20 +24,23 @@ class ConfigLoader:
             with open(file_path, 'r') as yml_file:
                 return load(yml_file)
         except FileNotFoundError:
-            raise ConfigNotFoundException(file_path, config_name)
+            raise ConfigNotFoundException(config_name)
 
 
 class Config:
     CONF_PATH = 'configuration_files/'
 
-    def __init__(self, file_prefix):
-        self._file_prefix = file_prefix  # type: Prefix
+    def __init__(self, profile):
+        self._profile = profile  # type: str
 
     def __getattr__(self, item):
-        config_dict = self._get_config(item)
-        self.__dict__[item] = config_dict
-        return config_dict
+        try:
+            config_dict = self._get_config(item).get(self.profile)
+            self.__dict__[item] = config_dict
+            return config_dict
+        except AttributeError:
+            raise ConfigProfileNotFoundException(self._profile)
 
     def _get_config(self, item):
-        config_name = f'{self._file_prefix.value}{item}.yml'
+        config_name = f'{item}.yml'
         return ConfigLoader.load(self.CONF_PATH, config_name)

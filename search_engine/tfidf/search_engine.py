@@ -22,10 +22,7 @@ def load(filename):
 
 
 class TfidfEngine(object):
-    def __init__(self,
-                 max_workers=4,
-                 tfidf_model=None,
-                 dictionary=None):
+    def __init__(self, max_workers=4, tfidf_model=None, dictionary=None):
         self.log = logging.getLogger('tfidf_search_engine')
         self.tfidf_model = tfidf_model
         self.dictionary = dictionary
