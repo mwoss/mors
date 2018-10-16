@@ -1,7 +1,6 @@
 import logging
 import pickle
 
-import sys
 from os import environ
 
 from gensim import similarities
@@ -9,9 +8,8 @@ from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 
 from configuration.config import Config
-from configuration.lda.config import LdaConfig
+from configuration.logger_uttils import init_logger
 from model.lda.preprocess import Preprocessor
-from search_engine.lda.logger.logger_config import init_logger
 from search_engine.search_engine import SearchEngine
 
 
@@ -25,10 +23,12 @@ def load(filename):
         return pickle.load(f)
 
 
+logger = init_logger(__name__)
+
+
 class LdaEngine(SearchEngine):
     def __init__(self, topics, max_workers=4, lda_model=None, dictionary=None):
         self.topics = topics
-        self.log = logging.getLogger('lda_search_engine')
         self.lda_model = lda_model
         self.dictionary = dictionary
         self.preprocessor = Preprocessor(max_workers=max_workers)
@@ -36,15 +36,13 @@ class LdaEngine(SearchEngine):
         self.urls = None
 
     def load_model(self, model_path, dict_path):
-        self.log.info("Loading model from %s", model_path)
+        logger.info("Loading model from %s", model_path)
         self.lda_model = LdaMulticore.load(model_path)
-        self.log.info("Loading dictionary from %s", dict_path)
         self.dictionary = Dictionary.load(dict_path)
 
     def save_index(self, index_path, url_path):
         self.log.info("Saving index to %s", index_path)
         self.index.save(index_path)
-        self.log.info("Saving urls to %s", url_path)
         save(url_path, self.urls)
 
     def load_index(self, index_path, url_path):
@@ -78,8 +76,7 @@ class LdaEngine(SearchEngine):
         return [(self.urls[i], sim) for i, sim in ss]
 
     def dict_search(self, query, results=100):
-        infer_query = self.infer(query)
-        inferred = self.index[infer_query]
+        inferred = self.index[self.infer(query)]
         inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:results]
 
         query_len = len(query.split(" "))
@@ -90,7 +87,6 @@ class LdaEngine(SearchEngine):
 
     @classmethod
     def from_configfile(cls):
-        init_logger()
         profile = environ.get('lda_profile', 'local')
         lda_config = Config(profile=profile).lda
 

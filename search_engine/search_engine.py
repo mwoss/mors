@@ -7,6 +7,10 @@ class SearchEngine(ABC):
     def dict_search(self, query, results=100):
         pass
 
+    @abstractmethod
+    def search(self, query):
+        pass
+
     @classmethod
     @abstractmethod
     def from_configfile(cls):
