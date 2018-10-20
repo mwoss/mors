@@ -1,5 +1,3 @@
-from _yaml import YAMLError
-from enum import Enum
 from os.path import abspath
 
 from yaml import load
