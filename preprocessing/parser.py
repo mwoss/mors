@@ -2,19 +2,24 @@ import json
 from os import listdir
 from os.path import isfile, join
 
+import logging
 
-class Parser(object):
+logger = logging.getLogger(__name__)
+
+
+class Parser:
     def __init__(self, directories, encoding):
         self.directories = directories
         self.encoding = encoding
 
-    def parse_articles_from_directories(self):
+    def parse_json_from_directories(self):
+        logger.info("Parsing json documents")
         docs = []
         for directory in self.directories:
-            docs = docs+self.parse_articles(directory)
+            docs = docs + self.parse_json(directory)
         return docs
 
-    def parse_articles(self, directory_path):
+    def parse_json(self, directory_path):
         files = [f for f in listdir(directory_path) if isfile(join(directory_path, f))]
         documents = []
         for num, file in enumerate(files):
@@ -23,6 +28,16 @@ class Parser(object):
             with open(directory_path + '/' + file, encoding=self.encoding) as f:
                 data = json.load(f)
 
-                content = data['title'] + ' ' + data['description'] + ' ' + data['content']
+                content = try_parse(data, 'title') + ' ' + \
+                          ' '.join(try_parse(data, 'author')) + ' ' + \
+                          try_parse(data, 'description') + ' ' + \
+                          try_parse(data, 'content')
                 documents.append((data['url'], content))
         return documents
+
+
+def try_parse(data, field):
+    try:
+        return data[field]
+    except:
+        return ''

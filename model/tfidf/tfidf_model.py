@@ -8,19 +8,15 @@ from model.tfidf.preprocess import Preprocessor, WithUrlPreprocessor
 
 class TFIDF(object):
     def __init__(self,
-                 max_workers,
-                 preprocessor=None):
+                 max_workers):
         self.max_workers = max_workers
         self.log = logging.getLogger('tfidf_model')
-        self.preprocessor = preprocessor if preprocessor is not None else Preprocessor(max_workers=max_workers)
         self.model, self.dictionary = None, None
 
     # @timed
-    def train(self, doc_list):
-        self.log.info('TFIDF.train called. Starting preprocessing %d documents', len(doc_list))
-        preprocessed_docs = self.preprocessor.process_docs(doc_list)
+    def train(self, preprocessed_docs):
 
-        self.log.info('Preprocessing ended. Building dictionary')
+        self.log.info('Building dictionary')
         self.dictionary = Dictionary(preprocessed_docs)
 
         self.log.info('Dictionary built with %d words. Building corpus', len(self.dictionary))
@@ -42,5 +38,4 @@ class TFIDF(object):
 
     @staticmethod
     def with_url_handling(max_workers):
-        return TFIDF(max_workers,
-                     preprocessor=WithUrlPreprocessor(max_workers=max_workers))
+        return TFIDF(max_workers)

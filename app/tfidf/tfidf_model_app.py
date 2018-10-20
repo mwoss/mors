@@ -8,7 +8,7 @@ from model.util.file_parser import parse_dir_json
 if __name__ == '__main__':
     init_logger()
 
-    config = TfidfConfig(sys.argv[1], 'tfidf_model').get_current_config()
+    config = TfidfConfig(sys.argv[1]).get_current_config()
 
     docs = parse_dir_json(config['data_path'])
 
