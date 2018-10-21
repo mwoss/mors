@@ -3,7 +3,7 @@ import logging
 from gensim.corpora import Dictionary
 from gensim.models import TfidfModel
 
-from model.tfidf.preprocess import Preprocessor, WithUrlPreprocessor
+logger = logging.getLogger(__name__)
 
 
 class TFIDF(object):
@@ -15,22 +15,21 @@ class TFIDF(object):
 
     # @timed
     def train(self, preprocessed_docs):
-
-        self.log.info('Building dictionary')
+        logger.info('Building dictionary')
         self.dictionary = Dictionary(preprocessed_docs)
 
-        self.log.info('Dictionary built with %d words. Building corpus', len(self.dictionary))
+        logger.info('Dictionary built with %d words. Building corpus', len(self.dictionary))
         corpus = [self.dictionary.doc2bow(line) for line in preprocessed_docs]  # convert dataset to BoW format
 
-        self.log.info('Built corpus')
+        logger.info('Built corpus')
         self.model = TfidfModel(corpus)
 
     def save_model(self, model_path):
-        self.log.info('Saving TFIDF model to file: %s', model_path)
+        logger.info('Saving TFIDF model to file: %s', model_path)
         self.model.save(model_path)
 
     def save_dictionary(self, dict_path):
-        self.log.info('Saving dictionary to file: %s', dict_path)
+        logger.info('Saving dictionary to file: %s', dict_path)
         self.dictionary.save(dict_path)
 
     def build_corpus(self, doc_list, dictionary):

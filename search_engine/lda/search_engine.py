@@ -7,7 +7,7 @@ from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 
 from configuration.lda.config import LdaConfig
-from model.lda.preprocess import Preprocessor
+from preprocessing.preprocessor import Preprocessor
 from search_engine.lda.logger.logger_config import init_logger
 
 logger = logging.getLogger(__name__)

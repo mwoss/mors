@@ -29,6 +29,7 @@ def main():
 
     algorithm = args.algorithm
     if algorithm == 'lda':
+        logger.info("Chosen lda")
         config = LdaConfig(profile)
         lda = LDA.with_url_handling(
             config['max_workers'],
@@ -41,6 +42,7 @@ def main():
         lda.save_model(config['dict_path'])
 
     elif algorithm == 'doc2vec':
+        logger.info("chosen doc2vec")
         config = Doc2VecConfig(profile)
         trainer = D2V(config['max_workers'],
                       config['vector_size'],
@@ -53,6 +55,7 @@ def main():
         trainer.train(docs)
 
     elif algorithm == 'tfidf':
+        logger.info("Chosen tfidf")
         config = TfidfConfig(profile)
         tfidf = TFIDF.with_url_handling(
             config['max_workers']
