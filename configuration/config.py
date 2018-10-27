@@ -45,7 +45,7 @@ class Config(metaclass=Singleton):
         try:
             config_dict = self._get_config(item)
             self.__dict__[item] = config_dict.get(self._profile)
-            return config_dict
+            return self.__dict__[item]
         except AttributeError:
             raise ConfigProfileNotFoundException(self._profile)
 

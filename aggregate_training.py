@@ -26,7 +26,7 @@ def main():
     algorithm = args.algorithm
     if algorithm == 'lda':
         logger.info("Chosen lda")
-        config = Config.lda.get(profile)
+        config = Config(profile).lda
         lda = LDA.with_url_handling(
             config['max_workers'],
             config['topics'],
@@ -39,7 +39,7 @@ def main():
 
     elif algorithm == 'doc2vec':
         logger.info("chosen doc2vec")
-        config = Config.doc2vec.get(profile)
+        config = Config(profile).doc2vec
         trainer = D2V(config['max_workers'],
                       config['vector_size'],
                       config['window'],
@@ -52,7 +52,7 @@ def main():
 
     elif algorithm == 'tfidf':
         logger.info("Chosen tfidf")
-        config = Config.tfidf.get(profile)
+        config = Config(profile).tfidf
         tfidf = TFIDF.with_url_handling(
             config['max_workers']
         )
@@ -66,7 +66,7 @@ def parse_articles(resource_path, encoding):
     data_directories = [os.path.join(resource_path, o) for o in os.listdir(resource_path) if
                         os.path.isdir(os.path.join(resource_path, o))]
     article_parser = Parser(data_directories, encoding)
-    return article_parser.parse_json_from_directories()
+    return article_parser.parse_articles_from_directories()
 
 
 def preprocess_doc(articles, max_workers):
