@@ -3,6 +3,15 @@ from os.path import abspath
 from yaml import load
 
 
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
 class ConfigNotFoundException(Exception):
     def __init__(self, config_name):
         self.config_name = config_name
@@ -26,7 +35,7 @@ class ConfigLoader:
             raise ConfigNotFoundException(config_name)
 
 
-class Config:
+class Config(metaclass=Singleton):
     CONF_PATH = 'configuration_files/'
 
     def __init__(self, profile):
@@ -34,8 +43,8 @@ class Config:
 
     def __getattr__(self, item):
         try:
-            config_dict = self._get_config(item).get(self.profile)
-            self.__dict__[item] = config_dict
+            config_dict = self._get_config(item)
+            self.__dict__[item] = config_dict.get(self._profile)
             return config_dict
         except AttributeError:
             raise ConfigProfileNotFoundException(self._profile)

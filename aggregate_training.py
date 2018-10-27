@@ -1,5 +1,5 @@
 import argparse
-import logging
+import logging.config
 import os
 
 from configuration.config import Config
@@ -32,7 +32,7 @@ def main():
             config['topics'],
             config['passes']
         )
-        docs = preprocess_doc(articles, p_conifg['max_workers'])
+        docs = preprocess_doc(articles, p_config['max_workers'])
         lda.train(docs)
         lda.save_model(config['model_path'])
         lda.save_model(config['dict_path'])
@@ -80,7 +80,5 @@ def preprocess_tagged_doc(articles, max_workers):
 
 
 if __name__ == "__main__":
-    import logging.config
-
     logging.config.fileConfig("configuration/logger.conf", disable_existing_loggers=False)
     main()

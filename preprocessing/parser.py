@@ -32,5 +32,5 @@ class Parser(object):
 def try_parse(data, field):
     try:
         return data[field]
-    except:
+    except Exception:
         return ''
