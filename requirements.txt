@@ -8,4 +8,8 @@ Pyro4==4.72
 scipy==1.1.0
 stop-words==2015.2.23.1
 pyYAML
-singleton-decorator
+
+django==2.1.2
+djangorestframework==3.8.2
+djangorestframework-simplejwt==3.2.3
+coreapi==2.3.3

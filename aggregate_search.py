@@ -1,7 +1,7 @@
 import logging.config
-from search_engine.lda_engine import LdaEngine
-from search_engine.tfidf_engine import TfidfEngine
-from search_engine.d2v_engine import D2VEngine
+from search_engine.engine.engines.lda_engine import LdaEngine
+from search_engine.engine.engines.tfidf_engine import TfidfEngine
+from search_engine.engine.engines.d2v_engine import D2VEngine
 
 
 class AggregateSearch(object):

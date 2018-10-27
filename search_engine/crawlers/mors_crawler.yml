@@ -1,0 +1,13 @@
+name: mors_crawler
+channels:
+  - defaults
+dependencies:
+  - scrapy
+  - beautifulsoup4
+  - regex
+  - requests
+  - pip:
+    - goose3
+    - HTMLParser
+    - langdetect
+    - warc3

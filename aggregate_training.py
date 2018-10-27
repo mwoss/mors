@@ -2,12 +2,12 @@ import argparse
 import logging.config
 import os
 
-from configuration.config import Config
-from model.doc2vec.doc2vec_model import D2V
-from model.lda.lda_model import LDA
-from model.tfidf.tfidf_model import TFIDF
-from preprocessing.parser import Parser
-from preprocessing.preprocessor import Preprocessor
+from search_engine.configuration.config import Config
+from search_engine.model.models.doc2vec_model import D2V
+from search_engine.model.models.lda_model import LDA
+from search_engine.model.models.tfidf_model import TFIDF
+from search_engine.preprocessing.parser import Parser
+from search_engine.preprocessing.preprocessor import Preprocessor
 
 logger = logging.getLogger(__name__)
 
