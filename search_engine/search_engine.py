@@ -3,7 +3,6 @@ from gensim.similarities import SparseMatrixSimilarity
 from model.model import EmptyModel, EmptyIndex, save_model, load_model
 
 
-# TODO: not sure about this implementation, tried abstaract base classes, but that was shitty also
 class SearchEngineMeta(type):
     def __call__(cls, *args, **kwargs):
         obj = type.__call__(cls, *args, **kwargs)
@@ -41,7 +40,6 @@ class SearchEngine(metaclass=SearchEngineMeta):
         raise NotImplementedError
 
 
-# change name to sth more appropriate
 class HybridEngine(SearchEngine):
     def search(self, query, results):
         inferred = self.index[self._infer(query)]

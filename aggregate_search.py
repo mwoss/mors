@@ -1,3 +1,4 @@
+import logging.config
 from search_engine.lda_engine import LdaEngine
 from search_engine.tfidf_engine import TfidfEngine
 from search_engine.d2v_engine import D2VEngine
@@ -20,8 +21,6 @@ class AggregateSearch(object):
 
 
 if __name__ == '__main__':
-    import logging.config
-
     logging.config.fileConfig("configuration/logger.conf", disable_existing_loggers=False)
 
     search = AggregateSearch(LdaEngine.from_configfile(), TfidfEngine.from_configfile(),

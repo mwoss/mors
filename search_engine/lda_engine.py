@@ -1,3 +1,4 @@
+from logging import getLogger
 from os import environ
 
 from gensim import similarities
@@ -5,11 +6,10 @@ from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 
 from configuration.config import Config
-from configuration.logger_uttils import init_logger
-from model.lda.preprocess import Preprocessor
+from preprocessing.preprocessor import Preprocessor
 from search_engine.search_engine import HybridEngine
 
-logger = init_logger(__name__)
+logger = getLogger(__name__)
 
 
 class LdaEngine(HybridEngine):

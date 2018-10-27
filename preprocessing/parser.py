@@ -6,6 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class Parser(object):
     MAX_DOCS_PER_DIR = 1000
 

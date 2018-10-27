@@ -19,7 +19,7 @@ def main():
     args = parser.parse_args()
     profile = args.config
 
-    preprocessing_config = Config.preprocessor.get(profile)
+    preprocessing_config = Config().preprocessor.get(profile)
     p_conifg = preprocessing_config.get_current_config()
 
     articles = parse_articles(p_conifg['data_path'], p_conifg['encoding'])

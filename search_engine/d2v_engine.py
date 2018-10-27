@@ -1,13 +1,13 @@
+from logging import getLogger
 from os import environ
 
 from gensim.models.doc2vec import Doc2Vec
 
 from configuration.config import Config
-from configuration.logger_uttils import init_logger
-from model.lda.preprocess import Preprocessor
+from preprocessing.preprocessor import Preprocessor
 from search_engine.search_engine import SearchEngine
 
-logger = init_logger(__name__)
+logger = getLogger(__name__)
 
 
 class D2VEngine(SearchEngine):
