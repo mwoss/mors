@@ -2,10 +2,7 @@ import argparse
 import logging
 import os
 
-from configuration.doc2vec.config import Doc2VecConfig
-from configuration.lda.config import LdaConfig
-from configuration.preprocessor.config import PreprocessorConfig
-from configuration.tfidf.config import TfidfConfig
+from configuration.config import Config
 from model.doc2vec.doc2vec_model import D2V
 from model.lda.lda_model import LDA
 from model.tfidf.tfidf_model import TFIDF
@@ -22,7 +19,7 @@ def main():
     args = parser.parse_args()
     profile = args.config
 
-    preprocessing_config = PreprocessorConfig(profile)
+    preprocessing_config = Config.preprocessor.get(profile)
     p_conifg = preprocessing_config.get_current_config()
 
     articles = parse_articles(p_conifg['data_path'], p_conifg['encoding'])
@@ -30,7 +27,7 @@ def main():
     algorithm = args.algorithm
     if algorithm == 'lda':
         logger.info("Chosen lda")
-        config = LdaConfig(profile)
+        config = Config.lda.get(profile)
         lda = LDA.with_url_handling(
             config['max_workers'],
             config['topics'],
@@ -43,7 +40,7 @@ def main():
 
     elif algorithm == 'doc2vec':
         logger.info("chosen doc2vec")
-        config = Doc2VecConfig(profile)
+        config = Config.doc2vec.get(profile)
         trainer = D2V(config['max_workers'],
                       config['vector_size'],
                       config['window'],
@@ -56,7 +53,7 @@ def main():
 
     elif algorithm == 'tfidf':
         logger.info("Chosen tfidf")
-        config = TfidfConfig(profile)
+        config = Config.tfidf.get(profile)
         tfidf = TFIDF.with_url_handling(
             config['max_workers']
         )
