@@ -6,14 +6,14 @@ from gensim.models import CoherenceModel, LdaMulticore
 
 from configuration.lda.config import LdaConfig
 from model.lda.logger.logger_config import init_logger
-from model.lda.preprocess import Preprocessor
+from preprocessing.preprocessor import Preprocessor
 from model.util.file_parser import parse_dir_json
 
 if __name__ == '__main__':
     init_logger()
     log = logging.getLogger('lda_model')
 
-    config = LdaConfig(sys.argv[1], 'lda_model').get_current_config()
+    config = LdaConfig(sys.argv[1]).get_current_config()
 
     _, docs = zip(*parse_dir_json(config['data_path']))
 

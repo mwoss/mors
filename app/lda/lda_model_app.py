@@ -8,7 +8,7 @@ from model.lda.logger.logger_config import init_logger
 if __name__ == '__main__':
     init_logger()
 
-    config = LdaConfig(sys.argv[1], 'lda_model').get_current_config()
+    config = LdaConfig(sys.argv[1]).get_current_config()
 
     docs = parse_dir_json(config['data_path'])
 

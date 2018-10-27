@@ -1,6 +1,7 @@
-from search_engine.lda.search_engine import LdaEngine
-from search_engine.tfidf.search_engine import TfidfEngine
-from search_engine.doc2vec.SearchEngine import D2VEngine
+import logging.config
+from search_engine.lda_engine import LdaEngine
+from search_engine.tfidf_engine import TfidfEngine
+from search_engine.d2v_engine import D2VEngine
 
 
 class AggregateSearch(object):
@@ -20,9 +21,10 @@ class AggregateSearch(object):
 
 
 if __name__ == '__main__':
+    logging.config.fileConfig("configuration/logger.conf", disable_existing_loggers=False)
 
-    search = AggregateSearch(LdaEngine.with_loaded_model(), TfidfEngine.with_loaded_model(),
-                             D2VEngine.with_loaded_model())
+    search = AggregateSearch(LdaEngine.from_configfile(), TfidfEngine.from_configfile(),
+                             D2VEngine.from_configfile())
 
     inp = ""
 
