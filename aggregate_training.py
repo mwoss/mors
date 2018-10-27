@@ -19,10 +19,9 @@ def main():
     args = parser.parse_args()
     profile = args.config
 
-    preprocessing_config = Config().preprocessor.get(profile)
-    p_conifg = preprocessing_config.get_current_config()
+    p_config = Config(profile=profile).preprocessor
 
-    articles = parse_articles(p_conifg['data_path'], p_conifg['encoding'])
+    articles = parse_articles(p_config['data_path'], p_config['encoding'])
 
     algorithm = args.algorithm
     if algorithm == 'lda':
@@ -48,7 +47,7 @@ def main():
                       config['epochs'],
                       config['dbow_model_path'] + 'model',
                       config['dm_model_path'] + "model")
-        docs = preprocess_tagged_doc(articles, p_conifg['max_workers'])
+        docs = preprocess_tagged_doc(articles, p_config['max_workers'])
         trainer.train(docs)
 
     elif algorithm == 'tfidf':
@@ -57,7 +56,7 @@ def main():
         tfidf = TFIDF.with_url_handling(
             config['max_workers']
         )
-        docs = preprocess_doc(articles, p_conifg['max_workers'])
+        docs = preprocess_doc(articles, p_config['max_workers'])
         tfidf.train(docs)
         tfidf.save_model(config['model_path'])
         tfidf.save_dictionary(config['dict_path'])
