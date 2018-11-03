@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mors_home',
+    'mors_seo',
     'rest_framework'
 ]
 

@@ -24,10 +24,10 @@ class SearchEngine(metaclass=SearchEngineMeta):
     def from_configfile(cls):
         raise NotImplementedError
 
-    def search(self, query, results):
+    def search(self, query, limit):
         raise NotImplementedError
 
-    def dict_search(self, query, results):
+    def dict_search(self, query, limit):
         raise NotImplementedError
 
     def load_model(self, model_path, dict_path):
@@ -41,14 +41,14 @@ class SearchEngine(metaclass=SearchEngineMeta):
 
 
 class HybridEngine(SearchEngine):
-    def search(self, query, results):
+    def search(self, query, limit):
         inferred = self.index[self._infer(query)]
-        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:results]
+        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:limit]
         return [(self.urls[i], sim) for i, sim in inferred]
 
-    def dict_search(self, query, results):
+    def dict_search(self, query, limit):
         inferred = self.index[self._infer(query)]
-        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:results]
+        inferred = sorted(enumerate(inferred), key=lambda item: -item[1])[:limit]
 
         query_len = len(query.split(" "))
         return {self.urls[i]: self._adjust(query_len, sim) for i, sim in inferred}

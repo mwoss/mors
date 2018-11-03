@@ -9,8 +9,8 @@ class AggregateSearch(object):
     def __init__(self, *engines):
         self.engines = engines
 
-    def search(self, query):
-        dict_results = [engine.dict_search(query, results=50) for engine in self.engines]
+    def search(self, query, limit=50):
+        dict_results = [engine.dict_search(query, limit=limit) for engine in self.engines]
         results = dict_results[0].keys()
 
         weighted_results = [(url, self.weighted_res(url, dict_results)) for url in results]
@@ -21,7 +21,7 @@ class AggregateSearch(object):
 
 
 if __name__ == '__main__':
-    logging.config.fileConfig("configuration/logger.conf", disable_existing_loggers=False)
+    logging.config.fileConfig("search_engine/configuration/logger.cfg", disable_existing_loggers=False)
 
     search = AggregateSearch(LdaEngine.from_configfile(), TfidfEngine.from_configfile(),
                              D2VEngine.from_configfile())

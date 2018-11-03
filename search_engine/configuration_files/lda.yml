@@ -1,10 +1,10 @@
 local:
   data_path: test_data/
-  model_path: model/lda/persistence/lda_model
-  dict_path: model/lda/persistence/dict
-  coherence_path: model/stats/coherence.csv
-  index_path: engine/lda/persistence/index
-  url_path: engine/lda/persistence/url
+  model_path: resources/model/lda/persistence/lda_model
+  dict_path: resources/model/lda/persistence/dict
+  coherence_path: search_engine/model/stats/coherence.csv
+  index_path: resources/search_engine/lda/persistence/index
+  url_path: resources/search_engine/lda/persistence/url
   max_workers: 4
   topics: 40
   passes: 20

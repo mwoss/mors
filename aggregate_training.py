@@ -80,5 +80,5 @@ def preprocess_tagged_doc(articles, max_workers):
 
 
 if __name__ == "__main__":
-    logging.config.fileConfig("configuration/logger.conf", disable_existing_loggers=False)
+    logging.config.fileConfig("search_engine/configuration/logger.cfg", disable_existing_loggers=False)
     main()

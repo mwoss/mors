@@ -2,6 +2,8 @@ from os.path import abspath
 
 from yaml import load
 
+CONF_PATH = 'search_engine/configuration_files/'
+
 
 class Singleton(type):
     _instances = {}
@@ -26,8 +28,8 @@ class ConfigProfileNotFoundException(Exception):
 
 class ConfigLoader:
     @staticmethod
-    def load(conf_path, config_name):
-        file_path = abspath(f'{conf_path}{config_name}')
+    def load(config_name):
+        file_path = abspath(f'{CONF_PATH}{config_name}')
         try:
             with open(file_path, 'r') as yml_file:
                 return load(yml_file)
@@ -36,8 +38,6 @@ class ConfigLoader:
 
 
 class Config(metaclass=Singleton):
-    CONF_PATH = 'configuration_files/'
-
     def __init__(self, profile):
         self._profile = profile  # type: str
 
@@ -51,4 +51,4 @@ class Config(metaclass=Singleton):
 
     def _get_config(self, item):
         config_name = f'{item}.yml'
-        return ConfigLoader.load(self.CONF_PATH, config_name)
+        return ConfigLoader.load(config_name)
