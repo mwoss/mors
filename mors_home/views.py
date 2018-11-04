@@ -15,6 +15,7 @@ aggregator = AggregateSearch(LdaEngine.from_configfile(), TfidfEngine.from_confi
 def search(request: Request):
     query = request.query_params.get('query')
     limit = request.query_params.get('limit', 15) % 50
+    print(query)
     return Response({
         "query": query,
         "result": aggregator.search(query)[:limit]
