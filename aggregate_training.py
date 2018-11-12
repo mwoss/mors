@@ -20,8 +20,9 @@ def main():
     profile = args.config
 
     p_config = Config(profile=profile).preprocessor
-
-    articles = parse_articles(p_config['data_path'], p_config['encoding'])
+    articles = []
+    if p_config['source'] == 'crawl':
+        articles = parse_articles(p_config['data_path'], p_config['encoding'])
 
     algorithm = args.algorithm
     if algorithm == 'lda':
@@ -32,8 +33,13 @@ def main():
             config['topics'],
             config['passes']
         )
-        docs = preprocess_doc(articles, p_config['max_workers'])
-        lda.train(docs)
+        docs = []
+        if p_config['source'] == 'crawl':
+            docs = preprocess_doc(articles, p_config['max_workers'])
+        if p_config['source'] == 'wiki':
+            docs = preprocess_wiki(p_config['data_path'], p_config['max_workers'])
+
+        lda.train([x[1] for x in docs])
         lda.save_model(config['model_path'])
         lda.save_model(config['dict_path'])
 
@@ -47,6 +53,11 @@ def main():
                       config['epochs'],
                       config['dbow_model_path'] + 'model',
                       config['dm_model_path'] + "model")
+        docs = []
+        if p_config['source'] == 'crawl':
+            docs = preprocess_doc(articles, p_config['max_workers'])
+        if p_config['source'] == 'wiki':
+            docs = preprocess_wiki(p_config['data_path'], p_config['max_workers'])
         docs = preprocess_tagged_doc(articles, p_config['max_workers'])
         trainer.train(docs)
 
@@ -56,8 +67,13 @@ def main():
         tfidf = TFIDF.with_url_handling(
             config['max_workers']
         )
+        docs = []
+        if p_config['source'] == 'crawl':
+            docs = preprocess_doc(articles, p_config['max_workers'])
+        if p_config['source'] == 'wiki':
+            docs = preprocess_wiki(p_config['data_path'], p_config['max_workers'])
         docs = preprocess_doc(articles, p_config['max_workers'])
-        tfidf.train(docs)
+        tfidf.train([x[1] for x in docs])
         tfidf.save_model(config['model_path'])
         tfidf.save_dictionary(config['dict_path'])
 
@@ -74,11 +90,23 @@ def preprocess_doc(articles, max_workers):
     return preprocessor.process_docs_with_urls(articles)
 
 
+def preprocess_wiki(wiki, max_workers):
+    logger.info("preprocessing {0}".format(wiki))
+    preprocessor = Preprocessor(max_workers)
+    return preprocessor.process_wiki(wiki)
+
+
+def preprocess_tagged_wiki(wiki):
+    preprocessor = Preprocessor(None)
+    return preprocessor.preprocess_tagged_wiki(wiki)
+
+
 def preprocess_tagged_doc(articles, max_workers):
     preprocessor = Preprocessor(max_workers)
     return preprocessor.preproces_tagged_docs_with_urls(articles)
 
 
 if __name__ == "__main__":
-    logging.config.fileConfig("configuration/logger.conf", disable_existing_loggers=False)
+    logging.config.fileConfig("configuration/logger.conf",
+                              disable_existing_loggers=False)
     main()

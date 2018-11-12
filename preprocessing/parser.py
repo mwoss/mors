@@ -1,8 +1,7 @@
 import json
+import logging
 from os import listdir
 from os.path import isfile, join
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -15,10 +14,13 @@ class Parser(object):
         self.encoding = encoding
 
     def parse_articles_from_directories(self):
+        docs = []
         for directory in self.directories:
-            yield from self._parse_articles(directory)
+            docs = docs + self._parse_articles(directory)
+        return docs
 
     def _parse_articles(self, directory_path):
+        documents = []
         files = [file for file in listdir(directory_path) if isfile(join(directory_path, file))]
 
         for file in files[:self.MAX_DOCS_PER_DIR]:
@@ -26,7 +28,8 @@ class Parser(object):
                 data = json.load(f)
 
                 content = data['title'] + ' ' + data['description'] + ' ' + data['content']
-                yield (data['url'], content)
+                documents.append((data['url'], content))
+        return documents
 
 
 def try_parse(data, field):
