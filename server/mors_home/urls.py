@@ -1,5 +1,5 @@
 from django.urls import path
-from mors_home import views
+from server.mors_home import views
 
 urlpatterns = [
     path('', views.search)

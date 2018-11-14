@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mors_home',
-    'mors_seo',
+    'server.mors_home',
+    'server.mors_seo',
     'rest_framework',
     'corsheaders',
 ]
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mors_browser.urls'
+ROOT_URLCONF = 'server.mors_browser.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mors_browser.wsgi.application'
+WSGI_APPLICATION = 'server.mors_browser.wsgi.application'
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
@@ -113,13 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # CORS Headers
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000',
-# )
-#
-# CSRF_TRUSTED_ORIGINS = (
-#     'http://localhost:3000',
-# )
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

@@ -23,7 +23,7 @@ urlpatterns = [
     re_path('^$', RedirectView.as_view(url='/api/', permanent=False)),
     path('admin/', admin.site.urls),
     path('api/', get_schema_view()),
-    path('api/search', include('mors_home.urls')),
+    path('api/search', include('server.mors_home.urls')),
     path('api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/auth/token/obtain/', TokenObtainPairView.as_view()),
     path('api/auth/token/refresh/', TokenRefreshView.as_view())

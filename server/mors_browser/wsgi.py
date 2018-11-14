@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mors_browser.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.mors_browser.settings')
 
 application = get_wsgi_application()
