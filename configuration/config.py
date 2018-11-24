@@ -15,19 +15,19 @@ class Singleton(type):
 class ConfigNotFoundException(Exception):
     def __init__(self, config_name):
         self.config_name = config_name
-        super().__init__(f"Config {config_name} was not found in conf/ directory")
+        super().__init__("Config {} was not found in conf/ directory".format(config_name))
 
 
 class ConfigProfileNotFoundException(Exception):
     def __init__(self, profile):
         self.profile = profile
-        super().__init__(f"Config file didn't include profile: {profile}")
+        super().__init__("Config file didn't include profile: {}".format(profile))
 
 
 class ConfigLoader:
     @staticmethod
     def load(conf_path, config_name):
-        file_path = abspath(f'{conf_path}{config_name}')
+        file_path = abspath('{}{}'.format(conf_path, config_name))
         try:
             with open(file_path, 'r') as yml_file:
                 return load(yml_file)
@@ -50,5 +50,5 @@ class Config(metaclass=Singleton):
             raise ConfigProfileNotFoundException(self._profile)
 
     def _get_config(self, item):
-        config_name = f'{item}.yml'
+        config_name = '{}.yml'.format(item)
         return ConfigLoader.load(self.CONF_PATH, config_name)
