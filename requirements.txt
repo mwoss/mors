@@ -11,6 +11,6 @@ pyYAML==3.13
 
 django==2.1.2
 djangorestframework==3.8.2
-djangorestframework-simplejwt==3.2.3
+django-rest-auth==0.9.3
+django-allauth==0.38.0
 django-cors-headers==2.4.0
-coreapi==2.3.3
