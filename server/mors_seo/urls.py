@@ -4,4 +4,6 @@ from server.mors_seo import views
 
 urlpatterns = [
     path('', views.UserListView.as_view()),
+    path('optimization', views.seoOptimization)
+
 ]
