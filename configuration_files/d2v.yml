@@ -1,7 +1,7 @@
 local:
   data_path: Resources/
   encoding: iso-8859-1
-  dbow_model_path: model/doc2vec/persistance/dbow/
+  dbow_model_path: /home/countess/PycharmProjects/SearchEngineDoc2Vec/model/doc2vec/persistence/dbow/model
   dm_model_path: model/doc2vec/persistance/dm/
   max_workers: 4
   vector_size: 100
@@ -10,7 +10,6 @@ local:
   epochs: 10
 
 zeus:
-  data_path: /mnt/auto/people/plgamarciniec/SearchEngineDoc2Vec/Resources
   encoding: iso-8859-1
   dbow_model_path: /mnt/auto/people/plgamarciniec/SearchEngineDoc2Vec/model/doc2vec/persistance/dbow/
   dm_model_path: /mnt/auto/people/plgamarciniec/SearchEngineDoc2Vec/model/doc2vec/persistance/dm/

@@ -2,6 +2,8 @@ import json
 import logging
 from os import listdir
 from os.path import isfile, join
+import zipfile
+import xmltodict
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +14,24 @@ class Parser(object):
     def __init__(self, directories, encoding):
         self.directories = directories
         self.encoding = encoding
+
+    def parse_reuters_data(self):
+        docs = []
+        for directory in self.directories:
+            docs = docs + self._parser_reuters_zips(directory)
+        return docs
+
+    def _parser_reuters_zips(self, directory_path):
+        documents = []
+        files = [file for file in listdir(directory_path) if isfile(join(directory_path, file))]
+        for zip_file in files:
+            with zipfile.ZipFile(directory_path + '/' + zip_file, "r") as zip_f:
+                for file_name in zip_f.namelist():
+                    file = zip_f.open(name=file_name)
+                    xml_dict = xmltodict.parse(file.read())
+                    content = xml_dict['newsitem']['text']['p']
+                    documents.append((xml_dict['newsitem']['title'], content))
+        return documents
 
     def parse_articles_from_directories(self):
         docs = []

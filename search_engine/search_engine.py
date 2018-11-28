@@ -67,8 +67,7 @@ class HybridEngine(SearchEngine):
         return self.model[bow]
 
     def infer_all(self, docs_with_urls):
-        preproc_docs_with_urls = self.preprocessor.process_docs_with_urls(docs_with_urls)
-        bags_of_words = [(url, self.dictionary.doc2bow(doc)) for url, doc in preproc_docs_with_urls]
+        bags_of_words = [(url, self.dictionary.doc2bow(doc)) for url, doc in docs_with_urls]
         return [(url, self.model[bow]) for url, bow in bags_of_words]
 
     def load_model(self, model_path, dict_path):

@@ -8,6 +8,8 @@ from model.lda.lda_model import LDA
 from model.tfidf.tfidf_model import TFIDF
 from preprocessing.parser import Parser
 from preprocessing.preprocessor import Preprocessor
+from search_engine.lda_engine import LdaEngine
+from search_engine.tfidf_engine import TfidfEngine
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +25,8 @@ def main():
     articles = []
     if p_config['source'] == 'crawl':
         articles = parse_articles(p_config['data_path'], p_config['encoding'])
+    elif p_config['source'] == 'zips':
+        articles = parse_articles_zip(p_config['data_path'], p_config['encoding'])
 
     algorithm = args.algorithm
     if algorithm == 'lda':
@@ -33,16 +37,19 @@ def main():
             config['topics'],
             config['passes']
         )
-        docs = []
-        if p_config['source'] == 'crawl':
-            docs = preprocess_doc(articles, p_config['max_workers'])
+
         if p_config['source'] == 'wiki':
             docs = preprocess_wiki(p_config['data_path'], p_config['max_workers'])
+        else:
+            docs = preprocess_doc(articles, p_config['max_workers'])
 
         lda.train([x[1] for x in docs])
         lda.save_model(config['model_path'])
         lda.save_model(config['dict_path'])
 
+        lda_search_engine = LdaEngine(config['topics'], config['max_workers'])
+        lda_search_engine.create_index(docs)
+        lda_search_engine.save_index(config['index_path'], config['url_path'])
     elif algorithm == 'doc2vec':
         logger.info("chosen doc2vec")
         config = Config(profile).doc2vec
@@ -53,13 +60,14 @@ def main():
                       config['epochs'],
                       config['dbow_model_path'] + 'model',
                       config['dm_model_path'] + "model")
-        docs = []
-        if p_config['source'] == 'crawl':
-            docs = preprocess_doc(articles, p_config['max_workers'])
+
         if p_config['source'] == 'wiki':
-            docs = preprocess_wiki(p_config['data_path'], p_config['max_workers'])
-        docs = preprocess_tagged_doc(articles, p_config['max_workers'])
+            docs = preprocess_tagged_wiki(p_config['data_path'])
+        else:
+            docs = preprocess_tagged_doc(articles, p_config['max_workers'])
         trainer.train(docs)
+        trainer.save_models()
+
 
     elif algorithm == 'tfidf':
         logger.info("Chosen tfidf")
@@ -67,15 +75,18 @@ def main():
         tfidf = TFIDF.with_url_handling(
             config['max_workers']
         )
-        docs = []
-        if p_config['source'] == 'crawl':
-            docs = preprocess_doc(articles, p_config['max_workers'])
         if p_config['source'] == 'wiki':
             docs = preprocess_wiki(p_config['data_path'], p_config['max_workers'])
-        docs = preprocess_doc(articles, p_config['max_workers'])
+        else:
+            docs = preprocess_doc(articles, p_config['max_workers'])
+
         tfidf.train([x[1] for x in docs])
         tfidf.save_model(config['model_path'])
         tfidf.save_dictionary(config['dict_path'])
+        tfidf_engine = TfidfEngine(config['max_workers'])
+        tfidf_engine.load_model(config['model_path'], config['dict_path'])
+        tfidf_engine.create_index(docs)
+        tfidf_engine.save_index(config['index_path'], config['url_path'])
 
 
 def parse_articles(resource_path, encoding):
@@ -83,6 +94,13 @@ def parse_articles(resource_path, encoding):
                         os.path.isdir(os.path.join(resource_path, o))]
     article_parser = Parser(data_directories, encoding)
     return article_parser.parse_articles_from_directories()
+
+
+def parse_articles_zip(resource_path, encoding):
+    data_directories = [os.path.join(resource_path, o) for o in os.listdir(resource_path) if
+                        os.path.isdir(os.path.join(resource_path, o))]
+    article_parser = Parser(data_directories, encoding)
+    return article_parser.parse_reuters_data()
 
 
 def preprocess_doc(articles, max_workers):

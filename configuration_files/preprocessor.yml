@@ -2,3 +2,27 @@ local:
   data_path: Resources/
   encoding: iso-8859-1
   max_workers: 4
+  source: wiki
+
+local-reuters:
+  data_path: Resources/reyt
+  encoding: iso-8859-1
+  max_workers: 4
+  source: reuters
+
+zeus:
+  data_path: /mnt/auto/people/plgamarciniec/SearchEngineDoc2Vec/Resources/simplewiki-latest-pages-articles.xml.bz2
+  encoding: iso-8859-1
+  max_workers: 32
+  source: wiki
+
+zeus-reuters:
+  data_path: /mnt/auto/people/plgamarciniec/SearchEngineDoc2Vec/Resources/reyt
+  encoding: iso-8859-1
+  max_workers: 32
+  source: reuters
+
+
+
+
+

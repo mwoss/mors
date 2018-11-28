@@ -9,7 +9,7 @@ local:
   topics: 40
   passes: 20
 
-zeus_rob:
+zeus:
   data_path: /mnt/auto/people/plgwciro/lda_model/data/
   model_path: /mnt/auto/people/plgwciro/mors/model/lda/persistence/lda_model
   dict_path: /mnt/auto/people/plgwciro/mors/model/lda/persistence/dict

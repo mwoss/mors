@@ -37,16 +37,21 @@ class Preprocessor:
         logger.info("preprocessing dump {0}".format(dump_file))
         """Yield each article from the Wikipedia dump, as a `(title, tokens)` 2-tuple."""
         ignore_namespaces = 'Wikipedia Category File Portal Template MediaWiki User Help Book Draft'.split()
+        index = 0
         for title, text, pageid in _extract_pages(smart_open(dump_file)):
+            if index > 160_000:
+                break
             text = filter_wiki(text)
             tokens = self.preprocess_doc(text)
             if len(tokens) < 50 or any(title.startswith(ns + ':') for ns in ignore_namespaces):
                 continue  # ignore short articles and various meta-articles
+            index += 1
             yield title, tokens
 
     def process_wiki(self, wiki):
         doc_stream = ((title, tokens) for title, tokens in self.iter_wiki(wiki))
-        return doc_stream
+        return list(doc_stream)
+
     def process_docs(self, doc_list):
         with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
             return list(executor.map(self.preprocess_doc, doc_list))
