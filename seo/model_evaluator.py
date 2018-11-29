@@ -191,10 +191,10 @@ class CategoriesEvaluator(AbstractEvaluator):
                                                 self.compute_similarity(url_and_text[1], phrase),
                                                 reverse=True)
 
-                        print(len(sorted_queries))
+                        # print(len(sorted_queries))
                         res_ind = sorted_queries.index(orininal_phrase)
-                        if res_ind > 0:
-                            print("phrase {} equivalent has index {} in \n {}".format(phrase, res_ind, sorted_queries))
+                        # if res_ind > 0:
+                        #     print("phrase {} equivalent has index {} in \n {}".format(phrase, res_ind, sorted_queries))
                         results.append(1 if res_ind == 0 else 0)
         return results, sum(results) / len(results)
 
@@ -218,10 +218,8 @@ class IntraInterEvaluator(AbstractEvaluator):
         return intra_inter_evaluator
 
     def split_wiki(self):
-        # self.part1 = [self.model[self.m_dict.doc2bow(tokens[: len(tokens) // 2])] for tokens in self.wiki_docs]
         self.part1 = [self.model[self.m_dict.doc2bow(tokens[1::2])] for tokens in self.wiki_docs]
         self.part2 = [self.model[self.m_dict.doc2bow(tokens[0::2])] for tokens in self.wiki_docs]
-        # self.part2 = [self.model[self.m_dict.doc2bow(tokens[len(tokens) // 2:])] for tokens in self.wiki_docs]
 
     def inter(self, pairs=10000):
         """
@@ -242,7 +240,7 @@ class IntraInterEvaluator(AbstractEvaluator):
         Generally, "the bigger the better", however the reachable maximum depends on the data.
         Apply 2 rules when evaluating:
         1. Return value should be generally higher than inter()
-        2. Compare the absolute values only on the same wiki_date between 2 different models
+        2. Compare the absolute values only on the same wiki_data between 2 different models
         """
         distances = [gensim.matutils.cossim(p1, p2) for p1, p2 in zip(self.part1, self.part2)]
         return np.mean(distances), np.std(distances)
