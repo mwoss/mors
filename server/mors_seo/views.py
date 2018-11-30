@@ -4,8 +4,11 @@ from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from seo.seo import SeoBooster
 from server.mors_seo import models
 from server.mors_seo import serializers
+
+seo = SeoBooster.from_configfile()
 
 
 class UserListView(generics.ListCreateAPIView):
@@ -16,10 +19,30 @@ class UserListView(generics.ListCreateAPIView):
 
 @api_view(['POST'])
 def seoOptimization(request: Request):
-    textName = request.query_params.get('textName')
-    query = request.query_params.get('query')
-    textArea = request.query_params.get('textArea')
+    data =request.data
+    textArea = data['textArea']
+    textName = data['textName']
+    query = data['query']
+
+    # TODO tutaj sa te rzeczy które trzeba wstwić do bazy
+    score = seo.compute_similarity(textArea, query),
+    queryKeywords = seo.compute_keywords(query),
+    documentKeywords = seo.compute_keywords(textArea),
+    general = seo.words_to_add_simple(textArea, query),
+    specific = seo.words_to_add_full(textArea, query),
+    flipSuggestions = {}
 
     return Response({
-        "score": '90',
+        "score": score,
+        "queryKeywords": queryKeywords,
+        "documentKeywords": documentKeywords,
+        "general": general,
+        "specific": specific,
+        "flipSuggestions": temporaryFlipSuggestions()
     })
+
+def temporaryFlipSuggestions():
+     my_dict = {'priest': 'pope',
+               'children':'child',
+               'kufer':'skrzynia'}
+     return  my_dict
