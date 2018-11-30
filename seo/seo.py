@@ -8,8 +8,8 @@ import time
 from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 
-from configuration.config import Config
-from preprocessing.preprocessor import Preprocessor
+from search_engine.configuration.config import Config
+from search_engine.preprocessing.preprocessor import Preprocessor
 
 logger = getLogger(__name__)
 
