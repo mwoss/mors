@@ -6,7 +6,7 @@ local:
   index_path: resources/search_engine/lda/persistence/index
   url_path: resources/search_engine/lda/persistence/url
   max_workers: 4
-  topics: 40
+  topics: 500
   passes: 20
 
 zeus_rob:
