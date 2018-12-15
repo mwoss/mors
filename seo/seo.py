@@ -1,8 +1,10 @@
 import json
+import re
 from logging import getLogger
 from os import environ
 import itertools
 
+import gensim
 import numpy as np
 import time
 from gensim.corpora import Dictionary
@@ -60,7 +62,7 @@ def flatten(arr):
 
 
 class SeoBooster(object):
-    max_keywords = 7
+    max_keywords = 9
     max_words_per_topic = 3
 
     def __init__(self, max_workers, topics):
@@ -68,6 +70,8 @@ class SeoBooster(object):
         self.topics = topics
         self.model = None
         self.m_dict = None
+        self.d2v=None
+        self.d2v_path = None
 
     @classmethod
     def from_configfile(cls):
@@ -76,6 +80,8 @@ class SeoBooster(object):
 
         seo = cls(lda_config['max_workers'], lda_config['topics'])
         seo.load_model(lda_config['model_path'], lda_config['dict_path'])
+        seo.d2v_path = lda_config['d2v_path']
+        print("loaded model with {} topics".format(seo.model.num_topics))
 
         return seo
 
@@ -107,9 +113,12 @@ class SeoBooster(object):
         """
         text_topics = self._infer(text)
         present_topics = self._infer_topics(text_topics, max_words_per_topic)
-        keywords_with_weights = flatten([ind_words[1] for ind_words in present_topics])
+        keywords_with_weights = flatten([
+            [(word, weight* (text_topics[ind_words[0]]**2)) for (word,weight) in ind_words[1]]
+            for ind_words in present_topics])
 
-        best_keywords = sorted(keywords_with_weights, key=lambda word_weight: word_weight[1], reverse=True)[
+        best_keywords = sorted([key_weight for key_weight in keywords_with_weights if len(key_weight[0]) >2],
+                               key=lambda word_weight: word_weight[1], reverse=True)[
                         :max_keywords]
         return [keyword for (keyword, weight) in best_keywords]
 
@@ -192,6 +201,23 @@ class SeoBooster(object):
                              key=lambda x: x[1],
                              reverse=True)][:max_keywords]
 
+    def words_to_flip(self,text, query,max_keywprds = max_keywords*2, max_similarities =5):
+        if not self.d2v:
+            self.load_d2v(self.d2v_path)
+        print("initial similarity: {}".format(self.compute_similarity(text,query)))
+        result = []
+        for word in set([w for w in re.findall(r"[\w']+", text) if len(w) > 2]):
+            try:
+                synonyms = self.d2v.most_similar(positive=[word],topn=max_similarities)
+                best_synonym = max([(synonym,self.compute_similarity(text.replace(word,synonym,1),query)) for (synonym, _) in synonyms],key=lambda x: x[1])
+                result.append((word,best_synonym))
+            except KeyError:
+                print('no words like {} in d2v model'.format(word))
+
+        sorted_result = sorted(result, key=lambda x: x[1][1],reverse=True)[:max_keywprds]
+
+        return {before_word : after_word for (before_word,(after_word,res)) in sorted_result}
+
     def _infer_topics(self, text_topics, max_words_per_topic=max_keywords):
         topics = sorted(self.model.show_topics(num_topics=self.topics, num_words=max_words_per_topic, formatted=False),
                         key=lambda topic_num_and_words: topic_num_and_words[0])  # set topics in order
@@ -211,3 +237,6 @@ class SeoBooster(object):
         bow = self.m_dict.doc2bow(processed_file)
 
         return to_dense(self.model[bow], self.topics) if dense else self.model[bow]
+
+    def load_d2v(self, d2v_path):
+        self.d2v = gensim.models.KeyedVectors.load_word2vec_format(d2v_path, binary=True)
