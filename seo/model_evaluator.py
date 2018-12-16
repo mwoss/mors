@@ -20,6 +20,10 @@ from seo.abstract_evaluator import AbstractEvaluator
 logger = getLogger(__name__)
 
 
+def sigmoid(x, a=1, b=0):
+    return 1 / (1 + np.math.exp(-a * (x - b)))
+
+
 class WordIntrusion(AbstractEvaluator):
     def __init__(self, max_workers, topics):
         super().__init__(max_workers, topics)
@@ -36,16 +40,18 @@ class WordIntrusion(AbstractEvaluator):
         flatten = lambda l: [item for sublist in l for item in sublist]
 
         to_insert = random.sample(flatten([
-            [word for word,_ in self.model.show_topic(topicno, topn=num_words_per_topics)]
+            [word for word, _ in self.model.show_topic(topicno, topn=num_words_per_topics)]
             for topicno
-            in range(num_topics, num_topics*2)]
+            in range(num_topics, num_topics * 2)]
         ), num_topics)
-        def concat_shuffle(array,item):
+
+        def concat_shuffle(array, item):
             result = array + [item]
             random.shuffle(result)
             return result
+
         return [
-            concat_shuffle(words,inser_word) + [inser_word] for words, inser_word in zip(to_display, to_insert)
+            concat_shuffle(words, inser_word) + [inser_word] for words, inser_word in zip(to_display, to_insert)
         ]
 
     # def get_mixed_topics(self):
@@ -151,10 +157,10 @@ class CategoriesEvaluator(AbstractEvaluator):
 
         categories_evaluator = cls(lda_config['max_workers'], lda_config['topics'],
                                    parse_categories(lda_config['categories_path']))
-        categories_evaluator.load_model(lda_config['model_path'], lda_config['dict_path'])
+        categories_evaluator.load_lda_model(lda_config['model_path'], lda_config['dict_path'])
         return categories_evaluator
 
-    def testCategories(self, passes=3, phrases_per_topic=10, false_queries=2):
+    def testCategories(self, passes=3, phrases_per_topic=5, false_queries=2):
         """
         The idea is to use DuckDuckGo API as a black box and compare our model's results against it.
         We take a phrase from category, let's say our phrase is 'bussiness intelligence' from
@@ -181,21 +187,25 @@ class CategoriesEvaluator(AbstractEvaluator):
         results = []
         for i in range(passes):
             for category in self.categories:
-                for phrase in random.sample([p for p in category if p], phrases_per_topic):
-                    orininal_phrase = get_query_result_with_retry(phrase)
-                    if orininal_phrase:
-                        queries = self.get_random_query_results(category, false_queries)
-                        queries.append(orininal_phrase)
-                        sorted_queries = sorted(queries,
-                                                key=lambda url_and_text:
-                                                self.compute_similarity(url_and_text[1], phrase),
-                                                reverse=True)
+                try:
+                    for phrase in random.sample([p for p in category if p], phrases_per_topic):
+                        orininal_phrase = get_query_result_with_retry(phrase)
+                        if orininal_phrase:
+                            queries = self.get_random_query_results(category, false_queries)
+                            queries.append(orininal_phrase)
+                            sorted_queries = sorted(queries,
+                                                    key=lambda url_and_text:
+                                                    self.compute_similarity(url_and_text[1], phrase),
+                                                    reverse=True)
 
-                        # print(len(sorted_queries))
-                        res_ind = sorted_queries.index(orininal_phrase)
-                        # if res_ind > 0:
-                        #     print("phrase {} equivalent has index {} in \n {}".format(phrase, res_ind, sorted_queries))
-                        results.append(1 if res_ind == 0 else 0)
+                            # print(len(sorted_queries))
+                            res_ind = sorted_queries.index(orininal_phrase)
+                            # if res_ind > 0:
+                            #     print("phrase {} equivalent has index {} in \n {}".format(phrase, res_ind, sorted_queries))
+                            results.append(1 if res_ind == 0 else 0)
+                except Exception as x:
+                    print("N error occured: "+str(x))
+
         return results, sum(results) / len(results)
 
 
@@ -212,7 +222,7 @@ class IntraInterEvaluator(AbstractEvaluator):
 
         intra_inter_evaluator = cls(lda_config['max_workers'], lda_config['topics'],
                                     load_wiki(lda_config['wiki_path']))
-        intra_inter_evaluator.load_model(lda_config['model_path'], lda_config['dict_path'])
+        intra_inter_evaluator.load_lda_model(lda_config['model_path'], lda_config['dict_path'])
         intra_inter_evaluator.split_wiki()
 
         return intra_inter_evaluator
@@ -244,3 +254,74 @@ class IntraInterEvaluator(AbstractEvaluator):
         """
         distances = [gensim.matutils.cossim(p1, p2) for p1, p2 in zip(self.part1, self.part2)]
         return np.mean(distances), np.std(distances)
+
+
+class CrossEvaluator(CategoriesEvaluator):
+    def __init__(self, max_workers, topics, wiki_docs,categories):
+        super().__init__(max_workers, topics,categories)
+        self.wiki_docs = wiki_docs
+        self.tfidf_model = None
+        self.a,self.b =1,4
+
+    @classmethod
+    def from_configfile(cls):
+        lda_profile = environ.get('lda_profile', 'local')
+        lda_config = Config(profile=lda_profile).lda
+
+        tfidf_profile = environ.get('tfidf_profile', 'local')
+        tfidf_config = Config(profile=tfidf_profile).tfidf
+
+        intra_inter_evaluator = cls(lda_config['max_workers'], lda_config['topics'],
+                                    load_wiki(lda_config['wiki_path']), parse_categories(lda_config['categories_path']))
+        intra_inter_evaluator.load_lda_model(lda_config['model_path'], lda_config['dict_path'])
+        intra_inter_evaluator.load_tfidf_model(tfidf_config['model_path'], lda_config['dict_path'])
+
+        intra_inter_evaluator.split_wiki()
+
+        return intra_inter_evaluator
+
+    def infer(self, doc1, doc2, a, b):
+        lda_sim = gensim.matutils.cossim(self.model[doc1], self.model[doc2])
+        tfidf_sim = gensim.matutils.cossim(self.tfidf_model[doc1], self.tfidf_model[doc2])
+        return sigmoid(len(doc1), a, b)*lda_sim + (1 - sigmoid(len(doc1), a, b))*tfidf_sim
+
+    def split_wiki(self):
+        self.part1 = [self.m_dict.doc2bow(tokens[1::2]) for tokens in self.wiki_docs]
+        self.part2 = [self.m_dict.doc2bow(tokens[0::2]) for tokens in self.wiki_docs]
+
+    def inter(self, pairs=4000,a=1,b=0):
+
+        random_pairs = np.random.randint(0, len(self.wiki_docs), size=(pairs, 2))
+        distances = [self.infer(self.part1[i[0]],self.part2[i[1]],a,b) for i in random_pairs]
+
+        return np.mean(distances), np.std(distances)
+
+    def intra(self,a=1,b=0):
+        """
+        Computes similarities between halves of the same document.
+        Generally, "the bigger the better", however the reachable maxdoc2imum depends on the data.
+        Apply 2 rules when evaluating:
+        1. Return value should be generally higher than inter()
+        2. Compare the absolute values only on the same wiki_data between 2 different models
+        """
+        distances = [self.infer(p1,p2,a,b) for p1, p2 in zip(self.part1, self.part2)]
+        return np.mean(distances), np.std(distances)
+
+    def compute_similarity(self, text, query):
+        """
+        :param text: string with text to compare
+        :param query: query as string
+        :return: similarity in range [0,100]
+        """
+        query_len= len(query.split())
+        text_topics_lda = self._infer(text,self.model,dense=False)
+        query_topics_lda = self._infer(query,self.model,dense=False)
+
+        text_topics_tfidf = self._infer(text, self.tfidf_model,dense=False)
+        query_topics_tfidf = self._infer(query,self.tfidf_model, dense=False)
+
+        lda_sim = gensim.matutils.cossim(query_topics_lda, text_topics_lda)
+        tfidf_sim = gensim.matutils.cossim(query_topics_tfidf, text_topics_tfidf)
+        return sigmoid(query_len, self.a, self.b) * lda_sim + (1 - sigmoid(query_len, self.a, self.b)) * tfidf_sim
+
+

@@ -2,7 +2,7 @@
 .ipynb_checkpoints/
 
 *IDE
-*\.idea\*
+.idea/*
 model1
 model2
 venv\

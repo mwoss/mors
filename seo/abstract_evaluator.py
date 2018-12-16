@@ -4,7 +4,7 @@ from os import environ
 import gensim
 import numpy as np
 from gensim.corpora import Dictionary
-from gensim.models import LdaMulticore
+from gensim.models import LdaMulticore, TfidfModel
 
 from configuration.config import Config
 from preprocessing.preprocessor import Preprocessor
@@ -28,6 +28,7 @@ class AbstractEvaluator(object):
         self.preprocessor = Preprocessor(max_workers=max_workers)
         self.topics = topics
         self.model = None
+        self.tfidf_model = None
         self.m_dict = None
         self.config = None
 
@@ -37,13 +38,18 @@ class AbstractEvaluator(object):
         lda_config = Config(profile=profile).lda
 
         abstractSeo = cls(lda_config['max_workers'], lda_config['topics'])
-        abstractSeo.load_model(lda_config['model_path'], lda_config['dict_path'])
+        abstractSeo.load_lda_model(lda_config['model_path'], lda_config['dict_path'])
 
         return abstractSeo
 
-    def load_model(self, model_path, dict_path):
+    def load_lda_model(self, model_path, dict_path):
         logger.info("Loading model from {}".format(model_path))
         self.model = LdaMulticore.load(model_path)
+        self.m_dict = Dictionary.load(dict_path)
+
+    def load_tfidf_model(self, model_path, dict_path):
+        logger.info("Loading model from {}".format(model_path))
+        self.tfidf_model = TfidfModel.load(model_path)
         self.m_dict = Dictionary.load(dict_path)
 
     def compute_similarity(self, text, query):
@@ -64,3 +70,10 @@ class AbstractEvaluator(object):
         bow = self.m_dict.doc2bow(processed_file)
 
         return to_dense(self.model[bow], self.topics) if dense else self.model[bow]
+
+    def _infer(self, query,model, dense=True):
+        processed_file = self.preprocessor.preprocess_doc(query)
+
+        bow = self.m_dict.doc2bow(processed_file)
+
+        return to_dense(model[bow], self.topics) if dense else model[bow]
