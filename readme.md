@@ -9,4 +9,3 @@ Application of topic models for information retrieval and search engine optimiza
 > python manage.py runserver
 ```
 Server starts at localhost:8000
-API schema can be found at /api/ route

@@ -1,48 +1,31 @@
-from rest_framework import generics
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from seo.seo import SeoBooster
-from server.mors_seo import models
-from server.mors_seo import serializers
+from server.mors_seo.models import User, SEOResult
 
 seo = SeoBooster.from_configfile()
 
-
-class UserListView(generics.ListCreateAPIView):
-    permission_classes = (AllowAny, )
-    queryset = models.User.objects.all()
-    serializer_class = serializers.UserSerializer
-
+@api_view(['GET'])
+def seo_history_list_view(request: Request):
+    pass
 
 @api_view(['POST'])
-def seoOptimization(request: Request):
-    data =request.data
-    textArea = data['textArea']
-    textName = data['textName']
-    query = data['query']
+def seo_optimization(request: Request):
+    text_area = request.data['textArea']
+    query = request.data['query']
 
-    # TODO tutaj sa te rzeczy które trzeba wstwić do bazy
-    score = seo.compute_similarity(textArea, query),
-    queryKeywords = seo.compute_keywords(query),
-    documentKeywords = seo.compute_keywords(textArea),
-    general = seo.words_to_add_simple(textArea, query),
-    specific = seo.words_to_add_full(textArea, query),
-    flipSuggestions = {}
+    seo_result = {
+        "score": seo.compute_similarity(text_area, query),
+        "query_keywords": seo.compute_keywords(query),
+        "document_keywords": seo.compute_keywords(text_area),
+        "general": seo.words_to_add_simple(text_area, query),
+        "specific": seo.words_to_add_full(text_area, query),
+    }
 
-    return Response({
-        "score": score,
-        "queryKeywords": queryKeywords,
-        "documentKeywords": documentKeywords,
-        "general": general,
-        "specific": specific,
-        "flipSuggestions": temporaryFlipSuggestions()
-    })
+    user = User.objects.get(email=request.user.email)
+    user.seo_result.append(SEOResult(**seo_result))
+    user.save()
 
-def temporaryFlipSuggestions():
-     my_dict = {'priest': 'pope',
-               'children':'child',
-               'kufer':'skrzynia'}
-     return  my_dict
+    return Response(seo_result)

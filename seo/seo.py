@@ -1,7 +1,7 @@
+import itertools
 import json
 from logging import getLogger
 from os import environ
-import itertools
 
 import numpy as np
 import time
@@ -185,12 +185,7 @@ class SeoBooster(object):
         weighted_words = flatten(
             [compute_score(topic_words, diff)[:max_words_per_topic] for topic_words in diff_topics])
 
-        return [
-                   word
-                   for (word, score)
-                   in sorted(weighted_words,
-                             key=lambda x: x[1],
-                             reverse=True)][:max_keywords]
+        return [word for (word, score) in sorted(weighted_words, key=lambda x: x[1], reverse=True)][:max_keywords]
 
     def _infer_topics(self, text_topics, max_words_per_topic=max_keywords):
         topics = sorted(self.model.show_topics(num_topics=self.topics, num_words=max_words_per_topic, formatted=False),
