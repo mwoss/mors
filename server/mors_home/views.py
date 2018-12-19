@@ -7,7 +7,6 @@ from aggregate_search import AggregateSearch
 from search_engine.engine.engines.d2v_engine import D2VEngine
 from search_engine.engine.engines.lda_engine import LdaEngine
 from search_engine.engine.engines.tfidf_engine import TfidfEngine
-from pprint import pprint
 
 from server.mors_home.model import Site
 
