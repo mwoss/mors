@@ -7,11 +7,13 @@ from server.mors_seo.managers import MongoUserManager
 
 
 class SEOResult(models.Model):
+    query = models.TextField()
+    text = models.TextField()
     score = models.FloatField()
-    query_keywords = models.TextField()
-    document_keywords = models.TextField()
-    general = models.TextField()
-    specific = models.TextField()
+    query_keywords = models.ListField(default=[])
+    document_keywords = models.ListField(default=[])
+    general = models.ListField(default=[])
+    specific = models.ListField(default=[])
 
     objects = DjongoManager()
 
@@ -23,7 +25,20 @@ class SEOResultForm(ModelForm):
     class Meta:
         model = SEOResult
         fields = (
-            'score', 'query_keywords', 'document_keywords', 'general', 'specific'
+            'score',
+            'query_keywords',
+            'document_keywords',
+            'general',
+            'specific',
+            'query',
+            'text'
+        )
+        # work around for buggy mongodb Djongo FormLess models
+        exclude = (
+            'query_keywords',
+            'document_keywords',
+            'general',
+            'specific',
         )
 
 
