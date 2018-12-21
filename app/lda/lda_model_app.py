@@ -1,9 +1,9 @@
 import sys
 
-from model.lda.lda_model import LDA
-from model.util.file_parser import parse_dir_json
-from configuration.lda.config import LdaConfig
-from model.lda.logger.logger_config import init_logger
+from search_engine.model import LDA
+from search_engine.model import parse_dir_json
+from search_engine.configuration import LdaConfig
+from search_engine.model import init_logger
 
 if __name__ == '__main__':
     init_logger()

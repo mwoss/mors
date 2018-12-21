@@ -1,4 +1,0 @@
-local:
-  data_path: Resources/
-  encoding: iso-8859-1
-  max_workers: 4

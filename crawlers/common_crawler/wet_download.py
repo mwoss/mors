@@ -2,7 +2,7 @@ import logging
 import os
 from requests import get
 
-from crawlers.common_crawler.utils import directory_check
+from crawlers.common_crawler import directory_check
 
 logging.basicConfig(format="%(asctime)s -- %(message)s", level=logging.INFO)
 

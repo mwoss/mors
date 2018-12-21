@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8e16830b-dc2c-48c2-91e5-86701270a608" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/model/doc2vec/persistence/model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/lda/persistence/dict" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/lda/persistence/lda_model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/lda/persistence/lda_model.expElogbeta.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/lda/persistence/lda_model.id2word" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/lda/persistence/lda_model.state" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/lda/persistence/lda_model.state.sstats.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/tfidf/persistence/dict" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/model/tfidf/persistence/tfidf_model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/lda/persistence/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/lda/persistence/url" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/tfidf/persistence/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/tfidf/persistence/index.index.data.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/tfidf/persistence/index.index.indices.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/tfidf/persistence/index.index.indptr.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/tfidf/persistence/index.index.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/search_engine/tfidf/persistence/url" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seo/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seo/seo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_engine/configuration_files/lda.yml" beforeDir="false" afterPath="$PROJECT_DIR$/search_engine/configuration_files/lda.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/mors_home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/mors_home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/mors_seo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/mors_seo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/mors_seo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/mors_seo/views.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="mors_crawler.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/crawlers/mors_crawler.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="3" selection-start-line="3" selection-end-line="12" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extract_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/crawlers/common_crawler/extract_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wet_download.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/crawlers/common_crawler/wet_download.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="529">
+              <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/crawlers/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/mors_home/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" column="47" selection-start-line="1" selection-start-column="47" selection-end-line="1" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/mors_seo/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/mors_seo/serializers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1449">
+              <caret line="63" selection-start-line="63" selection-end-line="63" />
+              <folding>
+                <element signature="e#0#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/mors_seo/tests.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/mors_seo/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#22#57#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>regex</find>
+      <find>ew</find>
+      <find>mors_browser</find>
+      <find>server</find>
+      <find>import res</find>
+      <find>this password is too com</find>
+      <find>import</find>
+      <find>impo</find>
+      <find>CORS</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="mati_ref" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/configuration/lda/config.py" />
+        <option value="$PROJECT_DIR$/crawlers/common_crawler/extract_data.py" />
+        <option value="$PROJECT_DIR$/crawlers/common_crawler/wet_download.py" />
+        <option value="$PROJECT_DIR$/search_engine/tfidf/search_engine.py" />
+        <option value="$PROJECT_DIR$/search_engine/lda/search_engine.py" />
+        <option value="$PROJECT_DIR$/configuration/logger_urtils.py" />
+        <option value="$PROJECT_DIR$/configuration/logger_uttils.py" />
+        <option value="$PROJECT_DIR$/search_engine/doc2vec/search_engine.py" />
+        <option value="$PROJECT_DIR$/configuration/config.py" />
+        <option value="$PROJECT_DIR$/search_engine/search_engine.py" />
+        <option value="$PROJECT_DIR$/search_engine/tfidf_engine.py" />
+        <option value="$PROJECT_DIR$/search_engine/lda_engine.py" />
+        <option value="$PROJECT_DIR$/model/model.py" />
+        <option value="$PROJECT_DIR$/search_engine/d2v_engine.py" />
+        <option value="$PROJECT_DIR$/aggregate_search.py" />
+        <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/server/mors_browser/wsgi.py" />
+        <option value="$PROJECT_DIR$/server/mors_seo/forms.py" />
+        <option value="$PROJECT_DIR$/server/mors_seo/admin.py" />
+        <option value="$PROJECT_DIR$/resources/model/doc2vec/persistence/.gitignore" />
+        <option value="$PROJECT_DIR$/server/mors_seo/serializers.py" />
+        <option value="$PROJECT_DIR$/server/mors_browser/settings.py" />
+        <option value="$PROJECT_DIR$/server/mors_seo/models.py" />
+        <option value="$PROJECT_DIR$/server/mors_home/admin.py" />
+        <option value="$PROJECT_DIR$/server/mors_home/model.py" />
+        <option value="$PROJECT_DIR$/server/mors_browser/urls.py" />
+        <option value="$PROJECT_DIR$/server/mors_api/urls.py" />
+        <option value="$PROJECT_DIR$/crawlers/requirements.txt" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/server/mors_home/views.py" />
+        <option value="$PROJECT_DIR$/server/mors_seo/views.py" />
+        <option value="$PROJECT_DIR$/server/mors_seo/urls.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="crawlers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="crawlers" type="462c0819:PsiDirectoryNode" />
+              <item name="common_crawler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="doc2vec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="doc2vec" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="lda" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="lda" type="462c0819:PsiDirectoryNode" />
+              <item name="persistence" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="mors_api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="mors_browser" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="mors_home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mors" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mors" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="mors_seo" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="plug&#9;ACTION&#9;WelcomeScreen.Plugins" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="DDL Data Source&#10;Sqlite (Xerial)" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../search" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.mongoOptions" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\AGH\Inzynierka\mors\resources\search_engine\tfidf\persistence" />
+      <recent name="D:\AGH\Inzynierka\mors\resources\search_engine\lda\persistence" />
+      <recent name="D:\AGH\Inzynierka\mors\resources\model\tfidf\persistence" />
+      <recent name="D:\AGH\Inzynierka\mors\resources\model\lda\persistence" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\AGH\Inzynierka\mors\server" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8e16830b-dc2c-48c2-91e5-86701270a608" name="Default" comment="" />
+      <created>1539540389095</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1539540389095</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Refactor next part">
+      <created>1539644112429</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1539644112429</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Refactor next part v3">
+      <created>1539731056458</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1539731056458</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Refactor next part v4">
+      <created>1539998489118</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1539998489118</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Django modules moved to server/ dir">
+      <created>1542227551747</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1542227551747</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Doing backend pa pam ram pam">
+      <created>1543027883065</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1543027883065</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Just for preserving proper res/ dir structure">
+      <created>1543192844390</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1543192844391</updated>
+    </task>
+    <task id="LOCAL-00007" summary="DB and search engine connected">
+      <created>1544894074951</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544894074951</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50159913" side_tool="true" visible="true" weight="0.4053156" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946696" weight="0.32779622" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.25490198" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="right" id="Mongo Explorer" order="3" sideWeight="0.87606114" visible="true" weight="0.3336887" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49840087" visible="true" weight="0.4053156" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14765458" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" weight="0.20842217" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="3" sideWeight="0.12393888" side_tool="true" weight="0.32995737" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Database Console" order="8" weight="0.32897604" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1652452" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3278867" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.25581396" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.4204793" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.4204793" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Refactor next part" />
+    <MESSAGE value="Refactor next part v3" />
+    <MESSAGE value="Refactor next part v4" />
+    <MESSAGE value="Django modules moved to server/ dir" />
+    <MESSAGE value="Doing backend pa pam ram pam" />
+    <MESSAGE value="Just for preserving proper res/ dir structure" />
+    <MESSAGE value="DB and search engine connected" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB and search engine connected" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/aggregate_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_home/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/model/lda/persistence/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/search_engine/tfidf/persistence/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/model/tfidf/persistence/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/model/doc2vec/persistence/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/search_engine/lda/persistence/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/views.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/registration/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="39" column="33" lean-forward="true" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/allauth/account/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-828" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e96a800d-1c16-4db2-b3cd-5646bb15f321/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/registration/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_framework/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="235" column="21" selection-start-line="235" selection-start-column="21" selection-end-line="235" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/registration/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="199" column="19" selection-start-line="199" selection-start-column="19" selection-end-line="199" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/app_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="141" column="35" lean-forward="true" selection-start-line="141" selection-start-column="35" selection-end-line="141" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/rest_auth/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2691">
+          <caret line="129" column="8" selection-start-line="129" selection-start-column="8" selection-end-line="129" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_home/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://e96a800d-1c16-4db2-b3cd-5646bb15f321/schema/main/table/mors_seo_user" />
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-99" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/migrations/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="27" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_home/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_home/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_browser/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="126" column="8" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_browser/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_api/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_home/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="3" column="11" selection-start-line="3" selection-end-line="3" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/scrapy.cfg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/requirements" />
+    <entry file="file://$PROJECT_DIR$/crawlers/scrapy_crawler/spiders/mobileworld_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="27" column="49" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/mors_crawler.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" selection-start-line="3" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/common_crawler/extract_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/common_crawler/wet_download.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawlers/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_home/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="47" selection-start-line="1" selection-start-column="47" selection-end-line="1" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#22#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1449">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mors_seo/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

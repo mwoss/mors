@@ -1,9 +1,9 @@
 import sys
 
-from configuration.tfidf.config import TfidfConfig
-from model.tfidf.logger.logger_config import init_logger
-from model.tfidf.tfidf_model import TFIDF
-from model.util.file_parser import parse_dir_json
+from search_engine.configuration import TfidfConfig
+from search_engine.model import init_logger
+from search_engine.model import TFIDF
+from search_engine.model import parse_dir_json
 
 if __name__ == '__main__':
     init_logger()

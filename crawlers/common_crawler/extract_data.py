@@ -10,7 +10,7 @@ from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException
 from warc import WARCRecord, open as warc_open
 
-from crawlers.common_crawler.utils import directory_check
+from crawlers.common_crawler import directory_check
 
 logging.basicConfig(format="%(asctime)s -- %(message)s", level=logging.INFO)
 
