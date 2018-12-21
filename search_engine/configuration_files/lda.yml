@@ -1,0 +1,21 @@
+local:
+  data_path: test_data/
+  model_path: resources/model/lda/persistence/lda_model
+  dict_path: resources/model/lda/persistence/dict
+  coherence_path: search_engine/model/stats/coherence.csv
+  index_path: resources/search_engine/lda/persistence/index
+  url_path: resources/search_engine/lda/persistence/url
+  max_workers: 4
+  topics: 500
+  passes: 20
+
+zeus_rob:
+  data_path: /mnt/auto/people/plgwciro/lda_model/data/
+  model_path: /mnt/auto/people/plgwciro/mors/model/lda/persistence/lda_model
+  dict_path: /mnt/auto/people/plgwciro/mors/model/lda/persistence/dict
+  coherence_path: /mnt/auto/people/plgwciro/mors/model/stats/coherence.csv
+  index_path: /mnt/auto/people/plgwciro/mors/engine/lda/persistence/index
+  url_path: /mnt/auto/people/plgwciro/mors/engine/lda/persistence/url
+  max_workers: 5
+  topics: 500
+  passes: 20

@@ -4,10 +4,10 @@ import sys
 from gensim.corpora import Dictionary
 from gensim.models import CoherenceModel, LdaMulticore
 
-from configuration.lda.config import LdaConfig
-from model.lda.logger.logger_config import init_logger
-from preprocessing.preprocessor import Preprocessor
-from model.util.file_parser import parse_dir_json
+from search_engine.configuration import LdaConfig
+from search_engine.model import init_logger
+from search_engine.preprocessing import Preprocessor
+from search_engine.model import parse_dir_json
 
 if __name__ == '__main__':
     init_logger()

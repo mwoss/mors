@@ -1,0 +1,8 @@
+scrapy
+beautifulsoup4
+regex
+requests
+goose3
+HTMLParser
+langdetect
+warc3

@@ -1,32 +1,15 @@
-import json
+import itertools
 from logging import getLogger
 from os import environ
-import itertools
 
 import numpy as np
-import time
 from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 
-from configuration.config import Config
-from preprocessing.preprocessor import Preprocessor
+from search_engine.configuration.config import Config
+from search_engine.preprocessing.preprocessor import Preprocessor
 
 logger = getLogger(__name__)
-
-
-def timeit(method):
-    def timed(*args, **kw):
-        ts = time.time()
-        result = method(*args, **kw)
-        te = time.time()
-        if 'log_time' in kw:
-            name = kw.get('log_name', method.__name__.upper())
-            kw['log_time'][name] = int((te - ts) * 1000)
-        else:
-            print('%r  %2.2f ms' % (method.__name__, (te - ts) * 1000))
-        return result
-
-    return timed
 
 
 def cosine_similarity(v1, v2):
@@ -38,21 +21,6 @@ def to_dense(array, size):
     for ind, val in array:
         arr[ind] = val
     return arr
-
-
-def parse(file):
-    with open(file, "r", encoding='utf-8', errors='replace') as f:
-        data = json.load(f)
-        content = data['title'] + ' ' + \
-                  data['description'] + ' ' + \
-                  data['content']
-
-        return content
-
-
-def parse_txt(file):
-    with open(file, 'r') as myfile:
-        return myfile.read()
 
 
 def flatten(arr):
@@ -113,7 +81,6 @@ class SeoBooster(object):
                         :max_keywords]
         return [keyword for (keyword, weight) in best_keywords]
 
-    @timeit
     def words_to_add_full(self, text, query, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic):
         """
         :param text: text to be optimized
@@ -133,7 +100,6 @@ class SeoBooster(object):
         return self._words_to_add(text, query, compute_score, max_keywords=max_keywords,
                                   max_words_per_topic=max_words_per_topic)
 
-    @timeit
     def words_to_add_simple(self, text, query, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic):
         """
         :param text: text to be optimized
@@ -185,12 +151,7 @@ class SeoBooster(object):
         weighted_words = flatten(
             [compute_score(topic_words, diff)[:max_words_per_topic] for topic_words in diff_topics])
 
-        return [
-                   word
-                   for (word, score)
-                   in sorted(weighted_words,
-                             key=lambda x: x[1],
-                             reverse=True)][:max_keywords]
+        return [word for (word, score) in sorted(weighted_words, key=lambda x: x[1], reverse=True)][:max_keywords]
 
     def _infer_topics(self, text_topics, max_words_per_topic=max_keywords):
         topics = sorted(self.model.show_topics(num_topics=self.topics, num_words=max_words_per_topic, formatted=False),
