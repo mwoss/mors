@@ -1,13 +1,14 @@
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
-from django.contrib.auth import authenticate
 from django.conf import settings
+from django.contrib.auth import authenticate
 from django.utils.translation import ugettext_lazy as _
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers, exceptions
 from rest_framework.request import Request
 
 from server.mors_seo import models
+from server.mors_seo.adapters import UserAdapter
 
 
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
@@ -36,7 +37,7 @@ class CustomRegistrationSerializer(RegisterSerializer):
         }
 
     def save(self, request: Request):
-        adapter = get_adapter()
+        adapter = UserAdapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user, self)
