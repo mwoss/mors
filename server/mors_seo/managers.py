@@ -12,8 +12,7 @@ class MongoUserManager(UserManager):
 
     @property
     def _client(self):
-        return (
-            pymongo_connections[self.db]
-                .cursor()
-                .db_conn[self.model._meta.db_table]
+        return (pymongo_connections[self.db]
+            .cursor()
+            .db_conn[self.model._meta.db_table]
         )
