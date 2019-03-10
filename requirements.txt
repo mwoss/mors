@@ -7,9 +7,10 @@ numpy==1.15.4
 Pyro4==4.72
 scipy==1.1.0
 stop-words==2015.2.23.1
-pyYAML==3.13
+pyyaml>=4.2b1
 
-django==2.1.2
+django>=2.1.6
+django>=2.1.6
 djangorestframework==3.8.2
 djangorestframework-jwt==1.11.0
 django-rest-auth==0.9.3
