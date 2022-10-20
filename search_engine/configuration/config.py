@@ -1,6 +1,11 @@
 from os.path import abspath
 
-from yaml import load
+from yaml import load as load_yaml
+
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
 CONF_PATH = 'search_engine/configuration_files/'
 
@@ -32,7 +37,7 @@ class ConfigLoader:
         file_path = abspath(f'{CONF_PATH}{config_name}')
         try:
             with open(file_path, 'r') as yml_file:
-                return load(yml_file)
+                return load_yaml(yml_file, Loader=Loader)
         except FileNotFoundError:
             raise ConfigNotFoundException(config_name)
 
