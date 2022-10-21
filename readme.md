@@ -1,6 +1,8 @@
 # MORS
 
-Application of topic models for information retrieval and search engine optimization.
+Application of topic models for information retrieval and search engine optimization.  
+
+Models and application has been tested on Python 3.7.
 
 ### How to run server, step-by-step
 ```angular2html
