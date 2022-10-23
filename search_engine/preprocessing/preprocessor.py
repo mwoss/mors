@@ -12,8 +12,8 @@ class Preprocessor:
     def __init__(self, max_workers):
         logger.info("Number of workers: %s", max_workers)
         self.max_workers = max_workers
-        self.tokenizer = RegexpTokenizer(r'\w+')
-        self.en_stopwords = set(get_stop_words('en'))
+        self.tokenizer = RegexpTokenizer(r"\w+")
+        self.en_stopwords = set(get_stop_words("en"))
         self.p_stemmer = PorterStemmer()
 
     def preprocess_doc(self, doc):

@@ -24,32 +24,21 @@ class SEOResult(models.Model):
 class SEOResultForm(ModelForm):
     class Meta:
         model = SEOResult
-        fields = (
-            'score',
-            'query_keywords',
-            'document_keywords',
-            'general',
-            'specific',
-            'query',
-            'text'
-        )
+        fields = ("score", "query_keywords", "document_keywords", "general", "specific", "query", "text")
         # work around for buggy mongodb Djongo FormLess models
         exclude = (
-            'query_keywords',
-            'document_keywords',
-            'general',
-            'specific',
+            "query_keywords",
+            "document_keywords",
+            "general",
+            "specific",
         )
 
 
 class User(AbstractUser):
     username = models.CharField(unique=True, max_length=30)
-    seo_result = models.ArrayModelField(
-        model_container=SEOResult,
-        model_form_class=SEOResultForm
-    )
+    seo_result = models.ArrayModelField(model_container=SEOResult, model_form_class=SEOResultForm)
 
     objects = MongoUserManager()
 
     def __str__(self):
-        return f'User: {self.username}, email: {self.email}'
+        return f"User: {self.username}, email: {self.email}"

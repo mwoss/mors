@@ -14,8 +14,8 @@ from server.mors_seo.adapters import UserAdapter
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ('username', 'email', 'first_name', 'last_name', 'date_joined')
-        read_only_fields = ('email',)
+        fields = ("username", "email", "first_name", "last_name", "date_joined")
+        read_only_fields = ("email",)
 
 
 class CustomRegistrationSerializer(RegisterSerializer):
@@ -26,14 +26,14 @@ class CustomRegistrationSerializer(RegisterSerializer):
         return fullname
 
     def get_cleaned_data(self):
-        first_name, last_name = self.validated_data.get('fullname', ' ').split(' ')
+        first_name, last_name = self.validated_data.get("fullname", " ").split(" ")
         return {
-            'first_name': first_name,
-            'last_name': last_name,
-            'username': self.validated_data.get('username', ''),
-            'password1': self.validated_data.get('password1', ''),
-            'email': self.validated_data.get('email', ''),
-            'seo_result': []
+            "first_name": first_name,
+            "last_name": last_name,
+            "username": self.validated_data.get("username", ""),
+            "password1": self.validated_data.get("password1", ""),
+            "email": self.validated_data.get("email", ""),
+            "seo_result": [],
         }
 
     def save(self, request: Request):
@@ -48,7 +48,7 @@ class CustomRegistrationSerializer(RegisterSerializer):
 
 class CustomLoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=False, allow_blank=True)
-    password = serializers.CharField(style={'input_type': 'password'})
+    password = serializers.CharField(style={"input_type": "password"})
 
     def _validate_username(self, username, password):
         if username and password:
@@ -71,29 +71,31 @@ class CustomLoginSerializer(serializers.Serializer):
         return user
 
     def validate(self, attrs):
-        username = attrs.get('username')
-        password = attrs.get('password')
+        username = attrs.get("username")
+        password = attrs.get("password")
 
-        if 'allauth' in settings.INSTALLED_APPS:
+        if "allauth" in settings.INSTALLED_APPS:
             from allauth.account import app_settings
+
             user = self._validate_username(username, password)
         else:
-            user = self._validate_username_email(username, '', password)
+            user = self._validate_username_email(username, "", password)
 
         if user:
             if not user.is_active:
-                msg = _('User account is disabled.')
+                msg = _("User account is disabled.")
                 raise exceptions.ValidationError(msg)
         else:
-            msg = _('Unable to log in with provided credentials.')
+            msg = _("Unable to log in with provided credentials.")
             raise exceptions.ValidationError(msg)
 
-        if 'rest_auth.registration' in settings.INSTALLED_APPS:
+        if "rest_auth.registration" in settings.INSTALLED_APPS:
             from allauth.account import app_settings
+
             if app_settings.EMAIL_VERIFICATION == app_settings.EmailVerificationMethod.MANDATORY:
                 email_address = user.emailaddress_set.get(email=user.email)
                 if not email_address.verified:
-                    raise serializers.ValidationError(_('E-mail is not verified.'))
+                    raise serializers.ValidationError(_("E-mail is not verified."))
 
-        attrs['user'] = user
+        attrs["user"] = user
         return attrs

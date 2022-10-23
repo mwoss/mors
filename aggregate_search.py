@@ -5,7 +5,6 @@ from search_engine.engine.engines.d2v_engine import D2VEngine
 
 
 class AggregateSearch(object):
-
     def __init__(self, *engines):
         self.engines = engines
 
@@ -20,14 +19,12 @@ class AggregateSearch(object):
         return sum([res[url] for res in dict_results if url in res]) / len(self.engines)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.config.fileConfig("search_engine/configuration/logger.cfg", disable_existing_loggers=False)
 
-    search = AggregateSearch(LdaEngine.from_configfile(), TfidfEngine.from_configfile(),
-                             D2VEngine.from_configfile())
+    search = AggregateSearch(LdaEngine.from_configfile(), TfidfEngine.from_configfile(), D2VEngine.from_configfile())
 
     inp = ""
-
-    while inp != 'q':
+    while inp != "q":
         inp = input("Enter query: ")
         print(search.search(inp)[:3])

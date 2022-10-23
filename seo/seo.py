@@ -39,11 +39,11 @@ class SeoBooster(object):
 
     @classmethod
     def from_configfile(cls):
-        profile = environ.get('lda_profile', 'local')
+        profile = environ.get("lda_profile", "local")
         lda_config = Config(profile=profile).lda
 
-        seo = cls(lda_config['max_workers'], lda_config['topics'])
-        seo.load_model(lda_config['model_path'], lda_config['dict_path'])
+        seo = cls(lda_config["max_workers"], lda_config["topics"])
+        seo.load_model(lda_config["model_path"], lda_config["dict_path"])
 
         return seo
 
@@ -61,8 +61,7 @@ class SeoBooster(object):
         text_topics = self._infer(text)
         query_topics = self._infer(query)
 
-        return int(
-            cosine_similarity(text_topics, query_topics) * 10000) / 100
+        return int(cosine_similarity(text_topics, query_topics) * 10000) / 100
 
     def compute_keywords(self, text, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic):
         """
@@ -78,7 +77,8 @@ class SeoBooster(object):
         keywords_with_weights = flatten([ind_words[1] for ind_words in present_topics])
 
         best_keywords = sorted(keywords_with_weights, key=lambda word_weight: word_weight[1], reverse=True)[
-                        :max_keywords]
+            :max_keywords
+        ]
         return [keyword for (keyword, weight) in best_keywords]
 
     def words_to_add_full(self, text, query, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic):
@@ -97,8 +97,9 @@ class SeoBooster(object):
         def compute_score(topic_words, diff):
             return self._compute_full_score(topic_words, text, query, diff)
 
-        return self._words_to_add(text, query, compute_score, max_keywords=max_keywords,
-                                  max_words_per_topic=max_words_per_topic)
+        return self._words_to_add(
+            text, query, compute_score, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic
+        )
 
     def words_to_add_simple(self, text, query, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic):
         """
@@ -110,20 +111,20 @@ class SeoBooster(object):
             The method is "simple" which means that each returned word will possibly increase similarity between :text
             and :query when added to :text. It takes the difference between vectors and returns words that should make
             :text vector shift towards :query vector. It doesn't however check if the shift will be too strong/too weak
-            or just accurate. It is faster than the "full" method and is less prone to model overfitting towards some features
-            but suggests more generic words.
+            or just accurate. It is faster than the "full" method and is less prone to model overfitting towards
+            some features but suggests more generic words.
         """
-        return self._words_to_add(text, query, self._compute_simple_score, max_keywords=max_keywords,
-                                  max_words_per_topic=max_words_per_topic)
+        return self._words_to_add(
+            text, query, self._compute_simple_score, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic
+        )
 
     def _compute_full_score(self, topic_words, text, query, diff):
         index, weighted_words = topic_words
         return sorted(
-            [(word, self.compute_similarity(text + " " + word, query))
-             for (word, weight)
-             in weighted_words],
+            [(word, self.compute_similarity(text + " " + word, query)) for (word, weight) in weighted_words],
             key=lambda word_similarity: word_similarity[1],
-            reverse=True)
+            reverse=True,
+        )
 
     def _compute_simple_score(self, topic_words, diff):
         def simple_score(index, weight):
@@ -131,14 +132,14 @@ class SeoBooster(object):
 
         index, weighted_words = topic_words
         return sorted(
-            [(word, simple_score(index, weight))
-             for (word, weight)
-             in weighted_words],
+            [(word, simple_score(index, weight)) for (word, weight) in weighted_words],
             key=lambda word_score: word_score[1],
-            reverse=True)
+            reverse=True,
+        )
 
-    def _words_to_add(self, text, query, compute_score, max_keywords=max_keywords,
-                      max_words_per_topic=max_words_per_topic):
+    def _words_to_add(
+        self, text, query, compute_score, max_keywords=max_keywords, max_words_per_topic=max_words_per_topic
+    ):
         text_inferred = self._infer(text)
         query_inferred = self._infer(query)
         diff = query_inferred - text_inferred
@@ -149,18 +150,22 @@ class SeoBooster(object):
         diff_topics = self._infer_topics(diff)
 
         weighted_words = flatten(
-            [compute_score(topic_words, diff)[:max_words_per_topic] for topic_words in diff_topics])
+            [compute_score(topic_words, diff)[:max_words_per_topic] for topic_words in diff_topics]
+        )
 
         return [word for (word, score) in sorted(weighted_words, key=lambda x: x[1], reverse=True)][:max_keywords]
 
     def _infer_topics(self, text_topics, max_words_per_topic=max_keywords):
-        topics = sorted(self.model.show_topics(num_topics=self.topics, num_words=max_words_per_topic, formatted=False),
-                        key=lambda topic_num_and_words: topic_num_and_words[0])  # set topics in order
+        topics = sorted(
+            self.model.show_topics(num_topics=self.topics, num_words=max_words_per_topic, formatted=False),
+            key=lambda topic_num_and_words: topic_num_and_words[0],
+        )  # set topics in order
         present_topics = [
-            (index,
-             sorted(words_with_weights, key=lambda word_with_weights: -word_with_weights[1])[:max_words_per_topic])
-            for (index, words_with_weights)
-            in topics
+            (
+                index,
+                sorted(words_with_weights, key=lambda word_with_weights: -word_with_weights[1])[:max_words_per_topic],
+            )
+            for (index, words_with_weights) in topics
             if text_topics[index]
         ]
 

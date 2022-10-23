@@ -7,7 +7,7 @@ try:
 except ImportError:
     from yaml import Loader, Dumper
 
-CONF_PATH = 'search_engine/configuration_files/'
+CONF_PATH = "search_engine/configuration_files/"
 
 
 class Singleton(type):
@@ -34,9 +34,9 @@ class ConfigProfileNotFoundException(Exception):
 class ConfigLoader:
     @staticmethod
     def load(config_name):
-        file_path = abspath(f'{CONF_PATH}{config_name}')
+        file_path = abspath(f"{CONF_PATH}{config_name}")
         try:
-            with open(file_path, 'r') as yml_file:
+            with open(file_path, "r") as yml_file:
                 return load_yaml(yml_file, Loader=Loader)
         except FileNotFoundError:
             raise ConfigNotFoundException(config_name)
@@ -55,5 +55,5 @@ class Config(metaclass=Singleton):
             raise ConfigProfileNotFoundException(self._profile)
 
     def _get_config(self, item):
-        config_name = f'{item}.yml'
+        config_name = f"{item}.yml"
         return ConfigLoader.load(config_name)

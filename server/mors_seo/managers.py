@@ -4,7 +4,7 @@ from django.db import connections as pymongo_connections
 
 class MongoUserManager(UserManager):
     def __getattr__(self, name):
-        if name.startswith('mongo'):
+        if name.startswith("mongo"):
             name = name[6:]
             return getattr(self._client, name)
         else:
@@ -12,7 +12,4 @@ class MongoUserManager(UserManager):
 
     @property
     def _client(self):
-        return (pymongo_connections[self.db]
-            .cursor()
-            .db_conn[self.model._meta.db_table]
-        )
+        return pymongo_connections[self.db].cursor().db_conn[self.model._meta.db_table]

@@ -2,12 +2,12 @@ from pickle import dump, load
 
 
 def save_model(filename, savable_data):
-    with open(filename, 'wb') as file:
+    with open(filename, "wb") as file:
         dump(savable_data, file)
 
 
 def load_model(filename):
-    with open(filename, 'rb') as file:
+    with open(filename, "rb") as file:
         return load(file)
 
 
@@ -31,6 +31,7 @@ class EmptyModel(EmptyObject):
 
 class EmptyIndex(EmptyObject):
     pass
+
 
 # TODO: implement base interface for lda, tfidf, d2v models, Aniu :33
 #  open for new attrs, extra __call__  method modification etc, dunno if we should differ empty index and empty model
