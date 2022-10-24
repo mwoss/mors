@@ -1,6 +1,6 @@
 from gensim.similarities import SparseMatrixSimilarity
 
-from search_engine.model.model import EmptyModel, EmptyIndex, save_model, load_model
+from search_engine.model.model import EmptyIndex, EmptyModel, load_model, save_model
 
 
 class SearchEngineMeta(type):

@@ -1,8 +1,6 @@
 import json
 import logging
-
 import os
-
 from codecs import open
 
 log = logging.getLogger("lda_model")

@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate
 from django.utils.translation import ugettext_lazy as _
 from rest_auth.registration.serializers import RegisterSerializer
-from rest_framework import serializers, exceptions
+from rest_framework import exceptions, serializers
 from rest_framework.request import Request
 
 from server.mors_seo import models

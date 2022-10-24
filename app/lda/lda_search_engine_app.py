@@ -1,9 +1,8 @@
 import sys
 
-from search_engine.model import parse_dir_json
-from search_engine.engine import LdaEngine
-from search_engine.engine import init_logger
 from search_engine.configuration import LdaConfig
+from search_engine.engine import LdaEngine, init_logger
+from search_engine.model import parse_dir_json
 
 if __name__ == "__main__":
     init_logger()

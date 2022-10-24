@@ -2,13 +2,14 @@ import logging
 from concurrent.futures import ProcessPoolExecutor
 from glob import iglob
 from json import dumps
-from os import remove, path
+from os import path, remove
 from re import compile, sub
 from typing import Generator
 
 from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException
-from warc import WARCRecord, open as warc_open
+from warc import WARCRecord
+from warc import open as warc_open
 
 from crawlers.common_crawler import directory_check
 

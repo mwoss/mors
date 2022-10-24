@@ -1,8 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
+
 from seo.seo import SeoBooster
-from server.mors_seo.models import User, SEOResult
+from server.mors_seo.models import SEOResult, User
 
 seo = SeoBooster.from_configfile()
 

@@ -1,5 +1,5 @@
 from errno import EEXIST
-from os import path, makedirs
+from os import makedirs, path
 
 
 def directory_check(directory):

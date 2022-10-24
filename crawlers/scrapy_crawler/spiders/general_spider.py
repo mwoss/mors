@@ -2,7 +2,7 @@ import errno
 import os
 
 from scrapy.linkextractor import LinkExtractor
-from scrapy.spider import Rule, CrawlSpider
+from scrapy.spider import CrawlSpider, Rule
 
 from crawlers.scrapy_crawler.items import GeneralItem
 from crawlers.scrapy_crawler.utils.html_strip import clear_content_full

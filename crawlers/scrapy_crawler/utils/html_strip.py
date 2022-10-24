@@ -1,4 +1,5 @@
 import re
+
 from bs4 import BeautifulSoup
 
 TAG_RE = re.compile(r"<[^>]+>")
