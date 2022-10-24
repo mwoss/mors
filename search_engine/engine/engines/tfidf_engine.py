@@ -19,12 +19,12 @@ class TfidfEngine(HybridEngine):
 
     @classmethod
     def from_configfile(cls):
-        profile = environ.get('tfidf_profile', 'local')
+        profile = environ.get("tfidf_profile", "local")
         tfidf_config = Config(profile=profile).tfidf
 
         search_engine = cls()
-        search_engine.load_model(tfidf_config['model_path'], tfidf_config['dict_path'])
-        search_engine.load_index(tfidf_config['index_path'], tfidf_config['url_path'])
+        search_engine.load_model(tfidf_config["model_path"], tfidf_config["dict_path"])
+        search_engine.load_index(tfidf_config["index_path"], tfidf_config["url_path"])
 
         return search_engine
 

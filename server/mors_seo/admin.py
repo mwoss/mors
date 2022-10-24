@@ -11,8 +11,8 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = User
-    list_display = ('email', 'username')
-    exclude = ('seo_result',)
+    list_display = ("email", "username")
+    exclude = ("seo_result",)
 
 
 admin.site.register(User, CustomUserAdmin)

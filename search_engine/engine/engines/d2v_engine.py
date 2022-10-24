@@ -17,11 +17,11 @@ class D2VEngine(SearchEngine):
 
     @classmethod
     def from_configfile(cls):
-        profile = environ.get('d2v_profile', 'local')
+        profile = environ.get("d2v_profile", "local")
         config = Config(profile).d2v
 
         search_engine = cls()
-        search_engine.load_model(config['dbow_model_path'])
+        search_engine.load_model(config["dbow_model_path"])
         return search_engine
 
     def load_model(self, model_path, dict_path=None):

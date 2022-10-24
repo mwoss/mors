@@ -17,11 +17,27 @@ class D2V(object):
         logger.info("Workers used in training: %s", self.cores)
         self.models = [
             # PV-DBOW
-            Doc2Vec(dm=0, dbow_words=1, vector_size=self.vector_size, window=self.window, seed=42,
-                    mmin_count=self.min_count, epochs=self.epochs, workers=self.cores),
+            Doc2Vec(
+                dm=0,
+                dbow_words=1,
+                vector_size=self.vector_size,
+                window=self.window,
+                seed=42,
+                mmin_count=self.min_count,
+                epochs=self.epochs,
+                workers=self.cores,
+            ),
             # PV-DM w/average
-            Doc2Vec(dm=1, dm_mean=1, vector_size=self.vector_size, window=self.window, seed=42,
-                    min_count=self.min_count, epochs=self.epochs, workers=self.cores),
+            Doc2Vec(
+                dm=1,
+                dm_mean=1,
+                vector_size=self.vector_size,
+                window=self.window,
+                seed=42,
+                min_count=self.min_count,
+                epochs=self.epochs,
+                workers=self.cores,
+            ),
         ]
 
     def build_vocabulary(self, preprocessed_docs):

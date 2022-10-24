@@ -5,18 +5,18 @@ from search_engine.model import parse_dir_json
 from search_engine.engine import TfidfEngine
 from search_engine.engine import init_logger
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init_logger()
 
-    config = TfidfConfig(sys.argv[1], 'tfidf_search_engine').get_current_config()
+    config = TfidfConfig(sys.argv[1], "tfidf_search_engine").get_current_config()
 
-    docs = parse_dir_json(config['data_path'])
+    docs = parse_dir_json(config["data_path"])
 
     searchEngine = TfidfEngine()
-    searchEngine.load_model(config['model_path'], config['dict_path'])
+    searchEngine.load_model(config["model_path"], config["dict_path"])
     searchEngine.dummy_index(docs)
 
-    searchEngine.save_index(config['index_path'], config['url_path'])
+    searchEngine.save_index(config["index_path"], config["url_path"])
 
     print(searchEngine.search("israel bank money")[:3])
     print(searchEngine.search("biggest wars in europe history")[:3])
@@ -29,6 +29,6 @@ if __name__ == '__main__':
 
     inp = ""
 
-    while inp != 'q':
+    while inp != "q":
         inp = input("Enter query: ")
         print(searchEngine.search(inp)[:3])

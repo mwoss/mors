@@ -7,8 +7,8 @@ from stop_words import get_stop_words
 class Preprocessor(object):
     def __init__(self, max_workers=4):
         self.max_workers = max_workers
-        self.tokenizer = RegexpTokenizer(r'\w+')
-        self.en_stopwords = set(get_stop_words('en'))
+        self.tokenizer = RegexpTokenizer(r"\w+")
+        self.en_stopwords = set(get_stop_words("en"))
         self.p_stemmer = PorterStemmer()
 
     def preprocess_doc(self, doc):
@@ -21,11 +21,11 @@ class Preprocessor(object):
         return stemmed_tokens
 
     def process_docs(self, doc_list):
-        with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
+        with ProcessPoolExecutor(max_workers=self.max_workers):
             return [self.preprocess_doc(doc) for doc in doc_list]
 
     def preprocess_doc_with_url(self, doc_with_url):
-        with ProcessPoolExecutor(max_workers=self.max_workers) as executor:
+        with ProcessPoolExecutor(max_workers=self.max_workers):
             url, content = doc_with_url
 
         return url, self.preprocess_doc(content)

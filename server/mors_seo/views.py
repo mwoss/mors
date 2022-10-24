@@ -7,20 +7,17 @@ from server.mors_seo.models import User, SEOResult
 seo = SeoBooster.from_configfile()
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def seo_history_list_view(request: Request):
     return Response(
-        User.objects.mongo_find(
-            {'username': request.user.username},
-            {'seo_result': 1,
-             '_id': 0})[0]['seo_result']
+        User.objects.mongo_find({"username": request.user.username}, {"seo_result": 1, "_id": 0})[0]["seo_result"]
     )
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def seo_optimization(request: Request):
-    text_area = request.data['textArea']
-    query = request.data['query']
+    text_area = request.data["textArea"]
+    query = request.data["query"]
     seo_result = {
         "score": seo.compute_similarity(text_area, query),
         "query_keywords": seo.compute_keywords(query),
@@ -30,7 +27,7 @@ def seo_optimization(request: Request):
     }
 
     user = User.objects.get(username=request.user.username)
-    user.seo_result.append(SEOResult(query=query, text=f'{text_area[:250]}...', **seo_result))
+    user.seo_result.append(SEOResult(query=query, text=f"{text_area[:250]}...", **seo_result))
     user.save()
 
     return Response(seo_result)

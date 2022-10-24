@@ -18,7 +18,7 @@ class SearchEngine(metaclass=SearchEngineMeta):
 
     def _is_preprocessor_set(self):
         if self.preprocessor is None:
-            raise NotImplementedError('Subclasses must define own preprocessor')
+            raise NotImplementedError("Subclasses must define own preprocessor")
 
     @classmethod
     def from_configfile(cls):

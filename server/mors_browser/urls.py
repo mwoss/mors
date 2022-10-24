@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    re_path('^$', RedirectView.as_view(url='/api/v1/', permanent=False)),
-    path('admin/', admin.site.urls),
-    path('api/v1/', include('server.mors_api.urls')),
+    re_path("^$", RedirectView.as_view(url="/api/v1/", permanent=False)),
+    path("admin/", admin.site.urls),
+    path("api/v1/", include("server.mors_api.urls")),
 ]

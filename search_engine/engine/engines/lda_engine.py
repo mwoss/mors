@@ -20,12 +20,12 @@ class LdaEngine(HybridEngine):
 
     @classmethod
     def from_configfile(cls):
-        profile = environ.get('lda_profile', 'local')
+        profile = environ.get("lda_profile", "local")
         lda_config = Config(profile=profile).lda
 
-        search_engine = cls(lda_config['topics'])
-        search_engine.load_model(lda_config['model_path'], lda_config['dict_path'])
-        search_engine.load_index(lda_config['index_path'], lda_config['url_path'])
+        search_engine = cls(lda_config["topics"])
+        search_engine.load_model(lda_config["model_path"], lda_config["dict_path"])
+        search_engine.load_index(lda_config["index_path"], lda_config["url_path"])
 
         return search_engine
 

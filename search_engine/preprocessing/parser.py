@@ -21,16 +21,16 @@ class Parser(object):
     def _parse_articles(self, directory_path):
         files = [file for file in listdir(directory_path) if isfile(join(directory_path, file))]
 
-        for file in files[:self.MAX_DOCS_PER_DIR]:
-            with open(directory_path + '/' + file, encoding=self.encoding) as f:
+        for file in files[: self.MAX_DOCS_PER_DIR]:
+            with open(directory_path + "/" + file, encoding=self.encoding) as f:
                 data = json.load(f)
 
-                content = data['title'] + ' ' + data['description'] + ' ' + data['content']
-                yield (data['url'], content)
+                content = data["title"] + " " + data["description"] + " " + data["content"]
+                yield data["url"], content
 
 
 def try_parse(data, field):
     try:
         return data[field]
     except Exception:
-        return ''
+        return ""
