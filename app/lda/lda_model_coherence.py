@@ -5,9 +5,8 @@ from gensim.corpora import Dictionary
 from gensim.models import CoherenceModel, LdaMulticore
 
 from search_engine.configuration import LdaConfig
-from search_engine.model import init_logger
+from search_engine.model import init_logger, parse_dir_json
 from search_engine.preprocessing import Preprocessor
-from search_engine.model import parse_dir_json
 
 from search_engine.model.
 

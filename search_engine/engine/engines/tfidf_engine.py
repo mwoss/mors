@@ -6,8 +6,8 @@ from gensim.models import TfidfModel
 from gensim.similarities import SparseMatrixSimilarity
 
 from search_engine.configuration.config import Config
-from search_engine.preprocessing.preprocessor import Preprocessor
 from search_engine.engine.search_engine import HybridEngine
+from search_engine.preprocessing.preprocessor import Preprocessor
 
 logger = getLogger(__name__)
 

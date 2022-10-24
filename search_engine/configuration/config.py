@@ -3,9 +3,10 @@ from os.path import abspath
 from yaml import load as load_yaml
 
 try:
-    from yaml import CLoader as Loader, CDumper as Dumper
+    from yaml import CDumper as Dumper
+    from yaml import CLoader as Loader
 except ImportError:
-    from yaml import Loader, Dumper
+    from yaml import Dumper, Loader
 
 CONF_PATH = "search_engine/configuration_files/"
 

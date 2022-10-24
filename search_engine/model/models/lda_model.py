@@ -1,5 +1,6 @@
 import logging
 from concurrent.futures import ProcessPoolExecutor
+
 from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 

@@ -4,7 +4,7 @@ from json import dumps
 from re import compile
 
 from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import Rule, CrawlSpider
+from scrapy.spiders import CrawlSpider, Rule
 
 from crawlers.scrapy_crawler.items import MobileWorldItem
 

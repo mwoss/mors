@@ -4,7 +4,7 @@ from json import dumps
 
 from goose3 import Goose
 from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import Rule, CrawlSpider
+from scrapy.spiders import CrawlSpider, Rule
 
 from crawlers.scrapy_crawler.items import BBCItem
 

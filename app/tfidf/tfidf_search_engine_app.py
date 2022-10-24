@@ -1,9 +1,8 @@
 import sys
 
 from search_engine.configuration import TfidfConfig
+from search_engine.engine import TfidfEngine, init_logger
 from search_engine.model import parse_dir_json
-from search_engine.engine import TfidfEngine
-from search_engine.engine import init_logger
 
 if __name__ == "__main__":
     init_logger()
